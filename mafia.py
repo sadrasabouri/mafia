@@ -30,7 +30,7 @@ def index():
         id += 1
     return render_template("index.html",
                             image_name=image_name,
-                            role_name=role,
+                            role_name=role, rol_name_fa=role2fa[role],
                             player_id=id - 1,
                             is_farsi=True)
 
