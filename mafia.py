@@ -23,14 +23,15 @@ def index():
         if id > nPlayers:
             return "Numbers of players out of range!"   #TODO:well defined Error Page
         role = roles[id]
-        image_name = role + "_" + str(randrange(1, nRoles[role] + 1))
-        ip2role_idx = (role, image_name)
+        ip2role_idx[ip] = (role, str(randrange(1, nRoles[role] + 1)))
+        image_name = role + "_" + str(ip2role_idx[ip][1])
         print("*" * 20, "New Player","*" * 20)
         print(ip + " : " + str(id) + " --> " + role)
         id += 1
     return render_template("index.html",
                             image_name=image_name,
-                            role_name=role, rol_name_fa=role2fa[role],
+                            role_name=role, role_name_fa=role2fa[role],
+                            description=descriptions[role],
                             player_id=id - 1,
                             is_farsi=True)
 
