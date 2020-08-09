@@ -1,0 +1,30 @@
+h1 {
+    font-size: 30px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+h2 {
+    font-size: 25px;
+    color: rgb(172, 161, 147);
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+p {
+    font-size: 10px;
+    color: rgb(163, 157, 150);
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+table, td, th {
+    width: 100%;
+    text-align: center;
+}
+
+th, td {
+    padding-top: 5px;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+}

@@ -1,0 +1,18 @@
+<!doctype html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel = "icon" href="static/images/roles/{{ image_name }}.png" type = "image/x-icon"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<table>
+    <tr>
+        <td>{% block avatar %}{% endblock %}</td>
+    </tr>
+    <tr>
+        <td class="role">{% block role_eng %}{% endblock %}</td>
+    </tr>
+    <tr>
+        <td class="description">{% block desc_eng %}{% endblock %}</td>
+    </tr>
+</table>
