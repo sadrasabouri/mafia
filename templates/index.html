@@ -8,17 +8,21 @@ FekroBot::mafia::{{ role_name }}
 <img class="avatar" src="static/images/roles/{{ image_name }}.png">
 {% endblock %}
 
-{% block role_eng %}
+{% block role_title %}
 <h1>{{ role_name }}
 {% if is_farsi == True %}
-    <h2 id="fa">دن</h2>
+    <h2 id="fa">...</h2>
 {% endif %}
 </h1>
 {% endblock %}
 
-{% block desc_eng %}
-<p>The head Of Mafia Team.</p>
+{% block desc %}
+<p>...</p>
 {% if is_farsi == True %}
-    <p id="fa">رییس مافیا</p>
+    <p id="fa">...</p>
 {% endif %}
+{% endblock %}
+
+{% block id_sec %}
+<p class="id_section">Your id (Tell it to God): {{ player_id }}</p>
 {% endblock %}
