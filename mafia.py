@@ -7,26 +7,24 @@ app = Flask(__name__)
 id = 0
 nPlayers = 0
 roles = []
-ip2role = {}
-ip2image = {}
+ip2role_idx = {}
 
 @app.route('/')
 def index():
-    global id, ip2role, ip2image
+    global id, ip2role_idx
     role = ""
     image_name = ""
     ip = str(request.remote_addr)
 
-    if ip in ip2role.keys():
-        role = ip2role[ip]
-        image_name = ip2image[ip]
+    if ip in ip2role_idx.keys():
+        role = ip2role_idx[ip][0]
+        image_name = ip2role_idx[ip][0] + "_" + str(ip2role_idx[ip][1])
     else:
         if id > nPlayers:
             return "Numbers of players out of range!"   #TODO:well defined Error Page
         role = roles[id]
         image_name = role + "_" + str(randrange(1, nRoles[role] + 1))
-        ip2role[ip] = role
-        ip2image[ip] = image_name
+        ip2role_idx = (role, image_name)
         print("*" * 20, "New Player","*" * 20)
         print(ip + " : " + str(id) + " --> " + role)
         id += 1
