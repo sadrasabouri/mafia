@@ -12,7 +12,7 @@ ip2image = {}
 
 @app.route('/')
 def index():
-    global id, roles, ip2role, ip2image, nPlayers
+    global id, ip2role, ip2image
     role = ""
     image_name = ""
     ip = str(request.remote_addr)
@@ -25,11 +25,11 @@ def index():
             return "Numbers of players out of range!"   #TODO:well defined Error Page
         role = roles[id]
         image_name = role + "_" + str(randrange(1, nRoles[role] + 1))
-        id += 1
         ip2role[ip] = role
         ip2image[ip] = image_name
         print("*" * 20, "New Player","*" * 20)
         print(ip + " : " + str(id) + " --> " + role)
+        id += 1
     return render_template("index.html",
                             image_name=image_name,
                             role_name=role,
