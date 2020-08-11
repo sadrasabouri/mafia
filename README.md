@@ -49,9 +49,14 @@ In defualt mode your address should be `server_ip:5000`.
 |:-------------------------------------:|
 | <img width="324" height="576" src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/mobile_browser.png"> |
 
+4. <b>Tracing roles from commandline</b>
+
+After each role assignment a message will be prompt to GOD's commandline which inform players ip, id and his/her role,
+players should inform the GOD with thier unique id so that GOD can find who is who.  
+
 | What GOD should see in the CLI |
 |:------------------------------:|
-| <img width="870" height="408" src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/CLI.png"> |
+| <img width="435" height="204" src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/CLI.png"> |
 
 ### Roles
 | Role            | image(s)                                                                                                                                |
