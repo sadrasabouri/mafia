@@ -7,7 +7,7 @@ ordered_roles = ["Resident",
                  "Mafia",
                  "Resident",
                  "Rebel",
-                 "Anti-attck",
+                 "Anti-attack",
                  "Mafia",
                  "Resident",
                  "Resident"]
