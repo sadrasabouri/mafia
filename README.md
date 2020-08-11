@@ -7,6 +7,8 @@ Playing mafia game made easy simply by having:
 
 There you go, lets play some mafia :sunglasses:.
 
+<img src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/mafia_game.png">
+
 ## Usage
 After cloning into mafia using command bellow:
 ```
