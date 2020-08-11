@@ -58,6 +58,26 @@ players should inform the GOD with thier unique id so that GOD can find who is w
 |:------------------------------:|
 | <img width="435" height="204" src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/CLI.png"> |
 
+## Game Rules
+Mafia is a social deduction game, created by Dimitry Davidoff in 1986. The game models a conflict between two groups: an informed minority (the mafia team), and an uninformed majority (the Residents).
+At the start of the game, each player is secretly assigned a role affiliated with one of these teams. The game has two alternating phases:
+
++ Night Phase
+
+a night role during which those with night killing powers may covertly kill other players
+
+All players close their eyes. The GOD then instructs all Mafias to open their eyes and acknowledge their accomplices. The mafias suggest a "victim" by silently gesturing to indicate their target and to show unanimity then Don (Mafia's head) should decide whom to be killed then close their eyes again.
+A similar process occurs for other roles with nightly actions. In the case of the Detector, the GOD may indicate the target's innocence or guilt by using gestures such as nodding or head shaking.
+
++ Day Phase
+
+a day role, in which surviving players debate the identities of players and vote to eliminate a suspect.
+
+The GOD instructs players to open their eyes. Discussion ensues among the living players. At any point, a player may accuse someone of being a mafia and prompt others to vote to eliminate them. If over half of the players do so, the accused person should go to the court.Players which goes to the court may have a speech defending theirselves from not being mafia, then GOD should take votes again and this time the player with maximum vote will dead and night begins. Otherwise, the phase continues until an elimination occurs.
+Dead players are not permitted to attempt to influence the remainder of the game.Because players have more freedom to deliberate, days tend to be longer than nights.
+
+The game continues until a faction achieves its win condition; for the Residents, this usually means eliminating the whole mafia team, while for the minority this usually means reaching numerical parity with the Residents.
+
 ### Roles
 | Role            | image(s)                                                                                                                                |
 | :-------------: |:----------------------------------------------------------------------------------------------------------------------------:           |
@@ -71,3 +91,5 @@ players should inform the GOD with thier unique id so that GOD can find who is w
 
 ## References
 Icons made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+
++ [https://en.wikipedia.org/wiki/Mafia_(party_game)](https://en.wikipedia.org/wiki/Mafia_(party_game))
