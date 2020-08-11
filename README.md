@@ -45,9 +45,13 @@ $ python3 mafia.py 5
 There you go, now each player can open a browser and type `serverhost:port_name`.
 
 In defualt mode your address should be `server_ip:5000`.
-| What player should see in the browser | What GOD should see in the CLI |
-|:-------------------------------------:|:------------------------------:|
-| <img width="216" height="384" src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/mobile_browser.png"> | <img width="435" height="204" src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/CLI.png"> |
+| What player should see in the browser |
+|:-------------------------------------:|
+| <img width="324" height="576" src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/mobile_browser.png"> |
+
+| What GOD should see in the CLI |
+|:------------------------------:|
+| <img width="870" height="408" src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/CLI.png"> |
 
 ### Roles
 | Role            | image(s)                                                                                                                                |
