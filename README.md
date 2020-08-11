@@ -1,9 +1,10 @@
 # mafia
 :dollar: Web Server Application For Mafia Game Playing On Local Network
 
-Playing mafia game made easy simply by having 
+Playing mafia game made easy simply by having: 
 + a system to run <b>mafia</b> on it (We call it FekroBot)
 + a hotspot that can provide a local host for us (your WIFI modem or your mobile hotspot)
+
 There you go, lets play some mafia :sunglasses:.
 
 ## Usage
@@ -30,14 +31,14 @@ Then install mafia requirements by
 ```
 $ pip3 install -r requirements.txt
 ```
-3. <b>Run the server application</b>
+2. <b>Run the server application</b>
 
 Now everything is ready, lets play:
 run the command `$python3 mafia.py number_of_players[int]`, for example imagine you want to play mafia with 5 players.
 ```
 $ python3 mafia.py 5
 ```
-4. <b>Getting roles</b>
+3. <b>Getting roles</b>
 
 There you go, now each player can open a browser and type `serverhost:port_name`.
 
