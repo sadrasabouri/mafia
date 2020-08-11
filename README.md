@@ -31,9 +31,9 @@ There you go, now each player can open a browser and type `serverhost:port_name`
 In defualt mode your desired address should be `server_ip:5000`.
 
 Each player should see a page like this in his/her browser:
-<img src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/doc/Pictures/mobile_browser.png">
+<img src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/mobile_browser.png">
 And the GOD can track player's role by checking CLI:
-<img src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/doc/Pictures/CLI.png">
+<img src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/CLI.png">
 
 ### Roles
 | Role            | image(s)                                                                                                                                |
