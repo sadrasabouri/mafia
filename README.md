@@ -7,7 +7,7 @@ After cloning into mafia using command bellow:
 $git clone https://github.com/sadrasabouri/mafia
 ```
 You should do these tiny steps:
-1. Instaling requiremets:
+0. [Install pip3]
 First check if you have `pip3` installed in your system:
 ```
 $pip3 --version
@@ -17,23 +17,24 @@ if you already have installed `pip3` youu should see something like above, other
 ```
 $sudo apt install python3-pip
 ```
-Otherwise/Then install <b>mafia</b> requirements by
+1. Instaling requiremets:
+Then install <b>mafia</b> requirements by
 ```
 $pip3 install -r requirements.txt
 ```
+3. Run the server application
 Now everything is ready, lets play:
 run the command `$python3 mafia.py number_of_players[int]`, for example imagine you want to play mafia with 5 players.
 ```
 $python3 mafia.py 5
 ```
+4. Getting roles
 There you go, now each player can open a browser and type `serverhost:port_name`.
 
-In defualt mode your desired address should be `server_ip:5000`.
-
-Each player should see a page like this in his/her browser:
-<img src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/mobile_browser.png">
-And the GOD can track player's role by checking CLI:
-<img src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/CLI.png">
+In defualt mode your address should be `server_ip:5000`.
+| What Player should see in the browser | What GOD should see in the CLI |
+|:-------------------------------------:|:------------------------------:|
+| <img width="216" height="384" src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/mobile_browser.png"> | <img width="435" height="204" src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/CLI.png"> |
 
 ### Roles
 | Role            | image(s)                                                                                                                                |
