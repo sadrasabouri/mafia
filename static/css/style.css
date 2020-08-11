@@ -1,20 +1,35 @@
+.description {
+    text-align: justify;
+    text-justify: auto;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#fa {
+    direction: rtl;
+    color: rgb(189, 185, 181);
+}
+
 h1 {
     font-size: 30px;
     padding: 0 0 0 0;
     margin: 0 0 0 0;
 }
+
 h2 {
     font-size: 25px;
     color: rgb(172, 161, 147);
     padding: 0 0 0 0;
     margin: 0 0 0 0;
 }
+
 p {
     font-size: 10px;
     color: rgb(163, 157, 150);
     padding: 0 0 0 0;
     margin: 0 0 0 0;
 }
+
 table, td, th {
     width: 100%;
     text-align: center;
@@ -31,11 +46,4 @@ th, td {
 
 .id_section {
     font-size: 10px;
-}
-
-.description {
-    text-align: justify;
-    text-justify: auto;
-    padding-left: 10%;
-    padding-right: 10%;
 }

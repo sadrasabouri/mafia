@@ -31,7 +31,7 @@ def index():
     return render_template("index.html",
                             image_name=image_name,
                             role_name=role, role_name_fa=role2fa[role],
-                            description=descriptions[role],
+                            description=descriptions[role], description_fa=descriptions_fa[role],
                             player_id=id - 1,
                             is_farsi=True)
 

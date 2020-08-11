@@ -19,10 +19,11 @@ FekroBot::mafia::{{ role_name }}
 {% block desc %}
 <p>{{ description }}</p>
 {% if is_farsi == True %}
-    <p id="fa">...</p>
+    <p id="fa">{{ description_fa }}</p>
 {% endif %}
 {% endblock %}
 
 {% block id_sec %}
+<hr>
 <p class="id_section">Your id (Tell it to the God): {{ player_id }}</p>
 {% endblock %}
