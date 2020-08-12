@@ -9,7 +9,7 @@ auth = HTTPBasicAuth()
 id = 0
 nPlayers = 0
 roles = []
-ip2role_idx = {}
+ip2role_index_name = {}
 
 @auth.verify_password
 def verify_password(username, password):
@@ -20,28 +20,30 @@ def verify_password(username, password):
 @app.route('/')
 @auth.login_required
 def index():
-    global id, ip2role_idx
+    global id, ip2role_index_name
+    username = str(auth.current_user())
     role = ""
     image_name = ""
     ip = str(request.remote_addr)
 
-    if ip in ip2role_idx.keys():
-        role = ip2role_idx[ip][0]
-        image_name = ip2role_idx[ip][0] + "_" + str(ip2role_idx[ip][1])
+    if ip in ip2role_index_name.keys():
+        role = ip2role_index_name[ip][0]
+        image_name = ip2role_index_name[ip][0] + "_" + str(ip2role_index_name[ip][1])
     else:
         if id > nPlayers:
             return "Numbers of players out of range!"   #TODO:well defined Error Page
         role = roles[id]
-        ip2role_idx[ip] = (role, str(randrange(1, nRoles[role] + 1)))
-        image_name = role + "_" + str(ip2role_idx[ip][1])
+        ip2role_index_name[ip] = (role, str(randrange(1, nRoles[role] + 1)), username)
+        image_name = role + "_" + str(ip2role_index_name[ip][1])
         print("*" * 20, "New Player","*" * 20)
-        print(ip + " : " + str(id) + " --> " + role)
+        toGod = ip + " : " + str(id) + " : " + username +  " --> " + role
+        toGod += "/" + role2fa[role]    #TODO: Just in Farsi Mode
+        print(toGod)
         id += 1
     return render_template("index.html",
                             image_name=image_name,
                             role_name=role, role_name_fa=role2fa[role],
                             description=descriptions[role], description_fa=descriptions_fa[role],
-                            player_id=id - 1,
                             is_farsi=True)
 
 
