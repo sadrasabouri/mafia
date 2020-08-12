@@ -14,6 +14,9 @@ ordered_roles = ["Resident",
                  "Resident",
                  "Mafia",
                  "Resident",
+                 "Resident",
+                 "Mafia",
+                 "Resident",
                  "Resident"]
 
 nRoles = {"Don" : 1,
