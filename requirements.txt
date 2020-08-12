@@ -2,3 +2,6 @@
 
 # mafia/mafia.py: 3
 Flask == 1.1.2
+
+# mafia/mafia.py: 4
+Flask_HTTPAuth == 4.1.0

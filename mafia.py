@@ -1,15 +1,24 @@
 from sys import argv
 from random import randrange, shuffle
 from flask import Flask, render_template, url_for, request
+from flask_httpauth import HTTPBasicAuth
 from mafia_params import *
 
 app = Flask(__name__)
+auth = HTTPBasicAuth()
 id = 0
 nPlayers = 0
 roles = []
 ip2role_idx = {}
 
+@auth.verify_password
+def verify_password(username, password):
+    if len(username) > 0:
+        return username
+    return None
+
 @app.route('/')
+@auth.login_required
 def index():
     global id, ip2role_idx
     role = ""
