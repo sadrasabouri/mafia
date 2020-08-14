@@ -47,6 +47,11 @@ def index():
                             is_farsi=True)
 
 
+@app.errorhandler(404) 
+def invalid_route(e):
+    return render_template("404.html", is_farsi=True)
+
+
 def help_me():
     usage = "-" * 70 + "\n"
     usage += "mafia - Web Server Application For Mafia Game Playing On Local Network \n\n"
