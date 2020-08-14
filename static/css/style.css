@@ -47,3 +47,17 @@ th, td {
 .id_section {
     font-size: 10px;
 }
+
+.action_table {
+    width: auto;
+    border: 1px solid black;
+    text-align: center;
+}
+
+#player_name{
+    width: 20%;
+}
+
+#player_role{
+    width: 20%;
+}
