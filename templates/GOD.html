@@ -1,13 +1,19 @@
 {% extends 'base_action.html' %}
 
 {% block sub_table %}
+<tr>
+    <th class="action_table" id="player_name">Player Name</th>
+    <th class="action_table" id="player_role">Player Role</th>
+    <th class="action_table" id="actions">Actions</th>
+</tr>
 {% for ip in ip2role_index_name.keys() %}
 <tr>
-    <td>
-        {{ ip2role_index_name[ip][0] }}
-    </td>
-    <td>
-        {{ ip2role_index_name[ip][2] }}
+    <td class="action_table" id="player_name">{{ ip2role_index_name[ip][2] }}</td>
+    <td class="action_table" id="player_role">{{ ip2role_index_name[ip][0] }}</td>
+    <td class="action_table" id="actions">
+        <a href="#">Ban</a>
+        <a href="#">Comment</a>
+        <a href="#">Kill</a>
     </td>
 </tr>
 {% endfor %}
