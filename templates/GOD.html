@@ -1,0 +1,14 @@
+{% extends 'base_action.html' %}
+
+{% block sub_table %}
+{% for ip in ip2role_index_name.keys() %}
+<tr>
+    <td>
+        {{ ip2role_index_name[ip][0] }}
+    </td>
+    <td>
+        {{ ip2role_index_name[ip][2] }}
+    </td>
+</tr>
+{% endfor %}
+{% endblock %}
