@@ -7,7 +7,7 @@ ordered_roles = ["Resident",
                  "Mafia",
                  "Resident",
                  "Rebel",
-                 "Anti-attack",
+                 "Bulletproof",
                  "Mafia",
                  "Resident",
                  "Resident",
@@ -25,16 +25,16 @@ nRoles = {"Don" : 1,
           "Doctor" : 2,
           "Rebel" : 1,
           "Detective" : 1,
-          "Anti-attack" : 1}
+          "Bulletproof" : 1}
 
 descriptions = {"Don" : "Don is the boss of the mafia group. At night mode Don decides whom to be killed from the mafia team.",
            "Resident" : "Resident is the typical player of the game. he/she has no power but to blame mafia in order to remove them from the game in day mode.",
            "Mafia" : "Mafia is the simple participant of the mafia team. Mafia gets up at night and try to decide which one of the players they want to kill.",
            "Doctor": "Doctor gets up after mafia team and tries to rescue a person (or two in the first night) from mafia's shot.",
-           "Detective" : "Detective gets up after Doctor and tries to ask GOD if someone is good (Resident, Doctor, Rebel, Anti-attack)."
+           "Detective" : "Detective gets up after Doctor and tries to ask GOD if someone is good (Resident, Doctor, Rebel, Bulletproof)."
                         "or bad(Mafia), but his/her first attempt to ask from Don may be answered incorrect by GOD.",
            "Rebel" : "Rebel gets up at night mode and kills a person.if the victim was chosen from residents, Rebel (him/her)self may die.",
-           "Anti-attack" : "Anti-attack doesn't hurt from night shots. he/she won't die through night mode."}
+           "Bulletproof" : "Bulletproof doesn't hurt from night shots. he/she won't die through night mode."}
 
 descriptions_fa = {"Don" : "دن رییس گروه مافیا است. در شب دن تصمیم می گیرد که چه کسی را از طرف تیم مافیا خارج کند",
            "Resident" : "شهروند عضو ساده شهر است. تنها قدرتی که شهروند دارد حذف افراد به واسطه رای گیری در روز است",
@@ -45,7 +45,7 @@ descriptions_fa = {"Don" : "دن رییس گروه مافیا است. در شب 
                         "وضعیت او را مشخص نمیکند",
            "Rebel" : "شورشی عضو تیم شهروندان است. او در شب از خواب بیدار می شود و سعی میکند یکی از اعضای تیم مافیا را هدف بگیرد در صورتی که"
                     "او مافیا را به درستی تشخیص دهد مافیا خواهد مرد و در غیر این صورت شورشی در اثر غم کشتن یک شهروند خود می میرد",
-           "Anti-attack" : "ضد ضربه از ضربات شب مافیا و شورشی در امان است. او هیچگاه در شب نمی میرد"}
+           "Bulletproof" : "ضد ضربه از ضربات شب مافیا و شورشی در امان است. او هیچگاه در شب نمی میرد"}
 
 role2fa = {"Don" : "دن",
            "Resident" : "شهروند",
@@ -53,4 +53,4 @@ role2fa = {"Don" : "دن",
            "Doctor": "دکتر",
            "Detective" : "کارآگاه",
            "Rebel" : "شورشی",
-           "Anti-attack" : "ضد ضربه"}
+           "Bulletproof" : "ضد ضربه"}
