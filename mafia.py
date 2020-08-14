@@ -47,6 +47,12 @@ def index():
                             is_farsi=True)
 
 
+@app.route('/GOD')
+def GOD_PAGE():
+    global ip2role_index_name
+    return render_template("GOD.html", ip2role_index_name=ip2role_index_name)
+
+ 
 @app.errorhandler(404) 
 def invalid_route(e):
     return render_template("404.html", is_farsi=True)
