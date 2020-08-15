@@ -35,8 +35,7 @@ def index():
         print("_" * 54)
     
     if ip in ip2role_index_name.keys():
-        role = ip2role_index_name[ip][0]
-        image_name = ip2role_index_name[ip][0] + "_" + str(ip2role_index_name[ip][1])
+        return render_template("Player.html", player_name=ip2role_index_name[ip][2])
     else:
         if id > nPlayers:
             return render_template("404.html", is_farsi=True)

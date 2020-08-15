@@ -64,6 +64,21 @@ th, td {
     background-color: red;
 }
 
+#myProgress {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 3px;
+}
+  
+#myBar {
+    width: 0%;
+    height: 30px;
+    background-color: #4f8ace;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 3px;
+}
+
 #player_name {
     width: 20%;
 }

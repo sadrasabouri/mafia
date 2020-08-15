@@ -1,0 +1,20 @@
+{% extends 'base_action.html' %}
+
+{% block sub_table %}
+<tr>
+    <td class="role">
+    <h1>{{ player_name }}</h1>
+    </td>
+</tr>
+<tr>
+    <td>
+    <img class="avatar" src="static/images/Warns/play.png" onclick="start()">
+    <div id="myProgress">
+        <div id="myBar">0</div>
+    </div>
+    </td>
+</tr>
+{% endblock %}
+
+{% block messages %}
+{% endblock %}
