@@ -7,7 +7,7 @@ Playing mafia game made easy simply by having:
 
 There you go, lets play some mafia :sunglasses:.
 
-<img src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/mafia_game.png">
+<img src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/doc/Pictures/mafia_game.png">
 
 ## Usage
 After cloning into mafia using command bellow:
@@ -47,7 +47,7 @@ There you go, now each player can open a browser and type `serverhost:port_name`
 In defualt mode your address should be `server_ip:5000`.
 | What player should see in the browser |
 |:-------------------------------------:|
-| <img width="324" height="576" src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/mobile_browser.png"> |
+| <img width="324" height="576" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/doc/Pictures/mobile_browser.png"> |
 
 4. <b>Tracing roles from commandline</b>
 
@@ -56,7 +56,7 @@ players should inform the GOD with thier unique id so that GOD can find who is w
 
 | What GOD should see in the CLI |
 |:------------------------------:|
-| <img width="435" height="204" src="https://raw.githubusercontent.com/sadrasabouri/mafia/README_update/doc/Pictures/CLI.png"> |
+| <img width="435" height="204" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/doc/Pictures/CLI.png"> |
 
 ## Game Rules
 Mafia is a social deduction game, created by Dimitry Davidoff in 1986. The game models a conflict between two groups: an informed minority (the mafia team), and an uninformed majority (the Residents).
@@ -79,15 +79,15 @@ Dead players are not permitted to attempt to influence the remainder of the game
 The game continues until a faction achieves its win condition; for the Residents, this usually means eliminating the whole mafia team, while for the minority this usually means reaching numerical parity with the Residents.
 
 ### Roles
-| Role            | image(s)                                                                                                                                |
-| :-------------: |:----------------------------------------------------------------------------------------------------------------------------:           |
-|      Don        | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Don_1.png">          |
-|     Mafia       | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Mafia_1.png"><img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Mafia_2.png">                                                          |
-|      Rebel      | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Rebel_1.png">        |
-|    Detective    | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Doctor_1.png"><img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Doctor_2.png">                                            |
-|    Detective    | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Detective_1.png">    |
-|   Anti-attack   | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Anti-attack_1.png">  |
-|     Resident    | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Resident_1.png"><img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Resident_2.png"><img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Resident_3.png"><img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Resident_4.png">                                                                                                                 |
+| Role | image(s) | Descriptions |
+|:----:|:--------:|:------------:|
+|      Don        | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Don_1.png"> | Don is the boss of the mafia group. At night mode Don decides whom to be killed from the mafia team.Don can't be detected by detective. |
+|     Mafia       | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Mafia_1.png"><img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Mafia_2.png"> | Mafia is the simple participant of the mafia team. Mafia gets up at night and try to decide which one of the players they want to kill, detective can detect this kind of mafia in night mode. |
+|      Rebel      | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Rebel_1.png"> | Rebel is from city team which gets up at night mode and kills a person.if the victim was chosen from residents, Rebel (him/her)self may die. |
+|    Doctor    | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Doctor_1.png"><img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Doctor_2.png"> | Doctor is a helpful participant of city team which gets up after mafia team and tries to rescue a person (or two in the first night) from mafia's shot. |
+|    Detective    | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Detective_1.png"> | Detective is from city team gets up at night mode and tries to ask GOD if someone is good (Resident, Doctor, Rebel, Bulletproof) or bad(Mafia), but his/her first attempt to ask from. Don may be answered incorrect by GOD. |
+|   Bulletproof   | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Bulletproof_1.png"> | Bulletproof is the most powerful resident which doesn't hurt from night shots. he/she won't die through night mode. |
+|     Resident    | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Resident_1.png"><img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Resident_2.png"><img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Resident_3.png"><img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Resident_4.png"> | Resident is the typical player of the game. he/she has no power but to blame mafia in order to remove them from the game in day mode. |
 
 ## References
 Icons made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> and <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
