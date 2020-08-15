@@ -12,6 +12,7 @@ id = 0
 nPlayers = 0
 roles = []
 ip2role_index_name = {}
+nComments = 0
 
 @auth.verify_password
 def verify_password(username, password):
@@ -40,7 +41,11 @@ def index():
         if id > nPlayers:
             return render_template("404.html", is_farsi=True)
         role = roles[id]
-        ip2role_index_name[ip] = (role, str(randrange(1, nRoles[role] + 1)), username)
+        ip2role_index_name[ip] = [role,
+                                  str(randrange(1, nRoles[role] + 1)),
+                                  username,
+                                  "alive",
+                                  False]
         image_name = role + "_" + str(ip2role_index_name[ip][1])
         print("*" * 20, "New Player","*" * 20)
         toGod = ip + " : " + str(id) + " : " + username +  " --> " + role
@@ -63,8 +68,31 @@ def verify_password_god(username, password):
 @app.route('/GOD')
 @auth_GOD.login_required
 def GOD_PAGE():
-    global ip2role_index_name
-    return render_template("GOD.html", ip2role_index_name=ip2role_index_name)
+    global ip2role_index_name, nComments
+    msg = ""
+    if request.args.get("Kill") is not None:
+        ip = request.args.get("Kill")
+        if ip in ip2role_index_name.keys():
+            ip2role_index_name[ip][3] = "dead"
+        else:
+            return render_template("404.html", is_farsi=True)
+    if request.args.get("Ban") is not None:
+        ip = request.args.get("Ban")
+        if ip in ip2role_index_name.keys():
+            ip2role_index_name[ip][3] = "banned"
+        else:
+            return render_template("404.html", is_farsi=True)
+    if request.args.get("Comment") is not None:
+        ip = request.args.get("Comment")
+        if ip in ip2role_index_name.keys():
+            if nComments <= nPlayers // 3:
+                ip2role_index_name[ip][4] = True
+            else:
+                msg = "Error: Out of Comments."
+        else:
+            return render_template("404.html", is_farsi=True)
+    return render_template("GOD.html", ip2role_index_name=ip2role_index_name,
+                           prompt_message=msg)
 
  
 @app.errorhandler(404) 
