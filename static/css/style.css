@@ -54,10 +54,24 @@ th, td {
     text-align: center;
 }
 
-#player_name{
+.alive {
+    background-color: white;
+}
+.banned {
+    background-color: darkgray;
+}
+.dead {
+    background-color: red;
+}
+
+#player_name {
     width: 20%;
 }
 
-#player_role{
+#player_role {
     width: 20%;
+}
+
+#is_comment {
+    width: 5%;
 }

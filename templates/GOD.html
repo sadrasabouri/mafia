@@ -2,19 +2,23 @@
 
 {% block sub_table %}
 <tr>
+    <th class="action_table" id="is_comment">C</th>
     <th class="action_table" id="player_name">Player Name</th>
     <th class="action_table" id="player_role">Player Role</th>
-    <th class="action_table" id="actions">Actions</th>
+    <th class="action_table" id="actions" colspan="3">Actions</th>
 </tr>
 {% for ip in ip2role_index_name.keys() %}
-<tr>
+<tr class="{{ ip2role_index_name[ip][3] }}">
+    <td class="action_table" id="is_comment">{% if ip2role_index_name[ip][4] == True%}+{% endif %}</td>
     <td class="action_table" id="player_name">{{ ip2role_index_name[ip][2] }}</td>
     <td class="action_table" id="player_role">{{ ip2role_index_name[ip][0] }}</td>
-    <td class="action_table" id="actions">
-        <a href="#">Ban</a>
-        <a href="#">Comment</a>
-        <a href="#">Kill</a>
-    </td>
+        <td class="action_table"><a href="/GOD?Ban={{ ip }}">Ban</a></td>
+        <td class="action_table"><a href="/GOD?Comment={{ ip }}">Comment</a></td>
+        <td class="action_table"><a href="/GOD?Kill={{ ip }}">Kill</a></td>
 </tr>
 {% endfor %}
+{% endblock %}
+
+{% block messages %}
+{{ prompt_message }}
 {% endblock %}
