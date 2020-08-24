@@ -35,7 +35,7 @@ def index():
         print("_" * 54)
     
     if ip in ip2role_index_name.keys():
-        return render_template("Player.html", player_name=ip2role_index_name[ip][2])
+        return render_template("Player.html", player=ip2role_index_name[ip])
     else:
         if id > nPlayers:
             return render_template("404.html", is_farsi=True)
@@ -72,22 +72,32 @@ def GOD_PAGE():
     if request.args.get("Kill") is not None:
         ip = request.args.get("Kill")
         if ip in ip2role_index_name.keys():
-            ip2role_index_name[ip][3] = "dead"
+            if ip2role_index_name[ip][3] == "alive":
+                ip2role_index_name[ip][3] = "dead"
+            else:
+                ip2role_index_name[ip][3] = "alive"
         else:
             return render_template("404.html", is_farsi=True)
     if request.args.get("Ban") is not None:
         ip = request.args.get("Ban")
         if ip in ip2role_index_name.keys():
-            ip2role_index_name[ip][3] = "banned"
+            if ip2role_index_name[ip][3] == "alive":
+                ip2role_index_name[ip][3] = "banned"
+            elif ip2role_index_name[ip][3] == "banned":
+                ip2role_index_name[ip][3] = "alive"
         else:
             return render_template("404.html", is_farsi=True)
     if request.args.get("Comment") is not None:
         ip = request.args.get("Comment")
         if ip in ip2role_index_name.keys():
-            if nComments <= nPlayers // 3:
-                ip2role_index_name[ip][4] = True
+            if ip2role_index_name[ip][4] == False:
+                if nComments <= nPlayers // 3:
+                    ip2role_index_name[ip][4] = True
+                    nComments += 1
+                else:
+                    msg = "Error: Out of Comments."
             else:
-                msg = "Error: Out of Comments."
+                ip2role_index_name[ip][4] = False
         else:
             return render_template("404.html", is_farsi=True)
     return render_template("GOD.html", ip2role_index_name=ip2role_index_name,
