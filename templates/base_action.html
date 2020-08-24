@@ -9,10 +9,8 @@
     <script type="text/javascript" src="static/js/main.js"></script>
 </head>
 <body>
-<audio id="beep">
-    <source src="static/voices/beep.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
+{% block Audio %}
+{% endblock %}
 <table style="border-collapse: collapse">
     {% block sub_table %}{% endblock %}
 </table>
