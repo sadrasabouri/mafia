@@ -3,12 +3,14 @@ function start() {
   if (i == 0) {
     i = 1;
     var elem = document.getElementById("myBar");
+    var beep_sound = document.getElementById("beep")
     var width = 0;
     var time_from_start = 0;
     var id = setInterval(frame, 10);
     function frame() {
       if (width >= 100) {
         clearInterval(id);
+        beep_sound.play();
         i = 0;
       } else {
         width += 1 / 45;
