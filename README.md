@@ -92,4 +92,6 @@ The game continues until a faction achieves its win condition; for the Residents
 ## References
 Icons made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> and <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>.
 
+Sounds from <a href="https://www.soundjay.com">Soundjay</a>.
+
 + [https://en.wikipedia.org/wiki/Mafia_(party_game)](https://en.wikipedia.org/wiki/Mafia_(party_game))

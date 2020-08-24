@@ -22,3 +22,17 @@ function start() {
     }
   }
 }
+
+function delay (URL, delay_time) {
+  setTimeout( function() { window.location = URL }, delay_time );
+}
+
+function kill_sound_play(){
+  var kill_sound = document.getElementById("kill");
+  kill_sound.play();
+}
+
+function ban_sound_play(){
+  var ban_sound = document.getElementById("ban");
+  ban_sound.play();
+}
