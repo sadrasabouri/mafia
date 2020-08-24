@@ -4,7 +4,9 @@
     <link rel = "icon" href="static/images/roles/{{ image_name }}.png" type = "image/x-icon"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="static/js/main.js" type="text/javascript"></script>
+    <script type="text/javascript" src="static/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="static/js/shieldui-all.min.js"></script>
+    <script type="text/javascript" src="static/js/main.js"></script>
 </head>
 <table style="border-collapse: collapse">
     {% block sub_table %}{% endblock %}
