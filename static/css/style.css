@@ -47,3 +47,47 @@ th, td {
 .id_section {
     font-size: 10px;
 }
+
+.action_table {
+    width: auto;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.alive {
+    background-color: white;
+}
+.banned {
+    background-color: darkgray;
+}
+.dead {
+    background-color: red;
+}
+
+#myProgress {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 5px;
+}
+  
+#myBar {
+    width: 0%;
+    height: 30px;
+    background-color: #4f8ace;
+    color:#ffffff;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 5px;
+}
+
+#player_name {
+    width: 20%;
+}
+
+#player_role {
+    width: 20%;
+}
+
+#is_comment {
+    width: 5%;
+}

@@ -1,15 +1,18 @@
 from sys import argv
-from random import randrange, shuffle
+from random import randrange, shuffle, sample
 from flask import Flask, render_template, url_for, request
 from flask_httpauth import HTTPBasicAuth
 from mafia_params import *
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
+auth_GOD = HTTPBasicAuth()
+preshared_key = ""
 id = 0
 nPlayers = 0
 roles = []
 ip2role_index_name = {}
+nComments = 0
 
 @auth.verify_password
 def verify_password(username, password):
@@ -26,14 +29,22 @@ def index():
     image_name = ""
     ip = str(request.remote_addr)
 
+    if id == 0:
+        print("_" * 20 + "GOD's password" + "_" * 20)
+        print(preshared_key)
+        print("_" * 54)
+    
     if ip in ip2role_index_name.keys():
-        role = ip2role_index_name[ip][0]
-        image_name = ip2role_index_name[ip][0] + "_" + str(ip2role_index_name[ip][1])
+        return render_template("Player.html", player=ip2role_index_name[ip])
     else:
         if id > nPlayers:
-            return "Numbers of players out of range!"   #TODO:well defined Error Page
+            return render_template("404.html", is_farsi=True)
         role = roles[id]
-        ip2role_index_name[ip] = (role, str(randrange(1, nRoles[role] + 1)), username)
+        ip2role_index_name[ip] = [role,
+                                  str(randrange(1, nRoles[role] + 1)),
+                                  username,
+                                  "alive",
+                                  False]
         image_name = role + "_" + str(ip2role_index_name[ip][1])
         print("*" * 20, "New Player","*" * 20)
         toGod = ip + " : " + str(id) + " : " + username +  " --> " + role
@@ -47,6 +58,52 @@ def index():
                             is_farsi=True)
 
 
+@auth_GOD.verify_password
+def verify_password_god(username, password):
+    if username == "GOD" and password == preshared_key:
+        return username
+
+
+@app.route('/GOD')
+@auth_GOD.login_required
+def GOD_PAGE():
+    global ip2role_index_name, nComments
+    msg = ""
+    if request.args.get("Kill") is not None:
+        ip = request.args.get("Kill")
+        if ip in ip2role_index_name.keys():
+            if ip2role_index_name[ip][3] == "alive":
+                ip2role_index_name[ip][3] = "dead"
+            else:
+                ip2role_index_name[ip][3] = "alive"
+        else:
+            return render_template("404.html", is_farsi=True)
+    if request.args.get("Ban") is not None:
+        ip = request.args.get("Ban")
+        if ip in ip2role_index_name.keys():
+            if ip2role_index_name[ip][3] == "alive":
+                ip2role_index_name[ip][3] = "banned"
+            elif ip2role_index_name[ip][3] == "banned":
+                ip2role_index_name[ip][3] = "alive"
+        else:
+            return render_template("404.html", is_farsi=True)
+    if request.args.get("Comment") is not None:
+        ip = request.args.get("Comment")
+        if ip in ip2role_index_name.keys():
+            if ip2role_index_name[ip][4] == False:
+                if nComments <= nPlayers // 3:
+                    ip2role_index_name[ip][4] = True
+                    nComments += 1
+                else:
+                    msg = "Error: Out of Comments."
+            else:
+                ip2role_index_name[ip][4] = False
+        else:
+            return render_template("404.html", is_farsi=True)
+    return render_template("GOD.html", ip2role_index_name=ip2role_index_name,
+                           prompt_message=msg)
+
+ 
 @app.errorhandler(404) 
 def invalid_route(e):
     return render_template("404.html", is_farsi=True)
@@ -74,6 +131,9 @@ if __name__ == "__main__":
         help_me()
     roles = ordered_roles[:nPlayers]
     shuffle(roles)
+    chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789!@#$%^&*()"
+    for i in range(4):
+        preshared_key += chars[randrange(0, len(chars))]
     app.run(host="0.0.0.0", \
             port=5000, \
             debug=True)
