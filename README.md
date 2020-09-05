@@ -90,6 +90,8 @@ The game continues until a faction achieves its win condition; for the Residents
 |     Lawyer    | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Lawyer_1.png"><img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Lawyer_2.png"> | Lawyer is from mafia team. Lawyer wakes up at night and inform the GOD whom should be sued to be to the court for next day phase. |
 
 #### City Team
+| Role | image(s) | Descriptions |
+|:----:|:--------:|:------------:|
 |      Rebel      | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Rebel_1.png"> | Rebel is from city team which gets up at night mode and kills a person.if the victim was chosen from residents, Rebel (him/her)self may die. |
 |    Doctor    | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Doctor_1.png"><img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Doctor_2.png"> | Doctor is a helpful participant of city team which gets up after mafia team and tries to rescue a person (or two in the first night) from mafia's shot. |
 |    Detective    | <img width="100" height="100" src="https://raw.githubusercontent.com/sadrasabouri/mafia/master/static/images/roles/Detective_1.png"> | Detective is from city team gets up at night mode and tries to ask GOD if someone is good (Resident, Doctor, Rebel, Bulletproof) or bad(Mafia), but his/her first attempt to ask from. Don may be answered incorrect by GOD. |
