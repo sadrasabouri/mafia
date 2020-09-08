@@ -9,7 +9,7 @@ ordered_roles = ["Resident",
                  "Mafia",
                  "Bulletproof",
                  "Resident",
-                 "Kind Wife",
+                 "Mafia",
                  "Resident",
                  "Resident",
                  "Mafia",
@@ -25,7 +25,11 @@ ordered_roles = ["Resident",
                  "Student",
                  "Postman",
                  "Mafia",
-                 "Clown"]
+                 "Clown",
+                 "Resident",
+                 "Mafia"
+                 "Resident",
+                 "Resident"]
 
 nRoles = {"Boxer" : 2,
           "Bride" : 5,
@@ -60,7 +64,11 @@ nRoles = {"Boxer" : 2,
           "Undercover Cop" : 2
           }
 
-descriptions = {"Don" : "Don is the boss of the mafia group. At night mode Don decides whom to be killed from the mafia team."
+descriptions = {"Boxor" : "", "Bride" : "", "BusDriver" : "", "Chef" : "", "Clown" : "", "Curious Kid" : "", "Genie" : "",
+            "Grandma" : "", "Groom" : "", "Hit Man" : "", "Insane" : "", "Jailer" : "", "Judge" : "", "Kind Wife" : "",
+            "Lawyer" : "", "Made Man" : "", "Magician" : "", "Miller" : "", "Postman" : "", "Priest" : "", "Rebel" : "",
+            "Reporter" : "", "Resident" : "", "Serial Killer" : "", "Student" : "", "Undercover Cop" : "",
+            "Don" : "Don is the boss of the mafia group. At night mode Don decides whom to be killed from the mafia team."
                         "Don can't be detected by detective.",
            "Resident" : "Resident is the typical player of the game. he/she has no power but to blame mafia in order to remove "
                         "them from the game in day mode.",
@@ -76,7 +84,11 @@ descriptions = {"Don" : "Don is the boss of the mafia group. At night mode Don d
            "Bulletproof" : "Bulletproof is the most powerful resident which doesn't hurt from night shots. he/she won't die"
                         " through night mode."}
 
-descriptions_fa = {"Don" : "اين نقش سردسته تيم مافيا مي باشد و مسئوليت تيم مافيا بر عهده دُن است.امتياز حائز اهميتی که دُن در بازی دارد اين است که استعلامش توسط کاراگاه همانند شهروندان منفی میباشد.",
+descriptions_fa = {"Boxor" : "", "Bride" : "", "BusDriver" : "", "Chef" : "", "Clown" : "", "Curious Kid" : "", "Genie" : "",
+            "Grandma" : "", "Groom" : "", "Hit Man" : "", "Insane" : "", "Jailer" : "", "Judge" : "", "Kind Wife" : "",
+            "Lawyer" : "", "Made Man" : "", "Magician" : "", "Miller" : "", "Postman" : "", "Priest" : "", "Rebel" : "",
+            "Reporter" : "", "Resident" : "", "Serial Killer" : "", "Student" : "", "Undercover Cop" : "",
+           "Don" : "اين نقش سردسته تيم مافيا مي باشد و مسئوليت تيم مافيا بر عهده دُن است.امتياز حائز اهميتی که دُن در بازی دارد اين است که استعلامش توسط کاراگاه همانند شهروندان منفی میباشد.",
            "Resident" : "شهروند عضو ساده شهر است. تنها قدرتی که شهروند دارد حذف افراد به واسطه رای گیری در روز است",
            "Mafia" : "از اعضای تیم مافیا میباشد و اگر کارآگاه از او استعلام بگیرد، استعلامش مثبت می شود",
            "Doctor": "دکتر يکی از اعضای تیم شهروند ميباشد که در فاز شب به فرمان خدای بازی چشم هايش را باز کرده و ميتواند خود و يا يکی از بازيکنان را از حذف شدن و کشته شدن در فاز شب بازی نجات دهد.",
@@ -84,10 +96,34 @@ descriptions_fa = {"Don" : "اين نقش سردسته تيم مافيا مي ب
            "Rebel" : "از اعضای تیم شهروند میباشد و در فاز شب میتواند کسی را که فکر میکند مافیا است را هدف قرار دهد اگر شخص مافیا بود خواهد مرد.اما اگر شورشی به اشتباه یک شهروند را هدف قرار دهد خودش خواهد مرد.",
            "Bulletproof" : "ضد ضربه قوی ترين شهروند بازی ميباشد ،و از هر تير مافیا در فاز شب در امان ميباشد.بنابرين ضد ضربه توسط مافيا در فاز شب قابل کشته شدن نميباشد"}
 
-role2fa = {"Don" : "دن",
-           "Resident" : "شهروند",
-           "Mafia" : "مافیا",
-           "Doctor": "دکتر",
-           "Detective" : "کارآگاه",
-           "Rebel" : "شورشی",
-           "Bulletproof" : "ضد ضربه"}
+role2fa = {"Boxer" : "بوکسور",
+          "Bride" : "عروس",
+          "Bulletproof" : "ضدضربه",
+          "Bus Driver" : "راننده اتوبوس",
+          "Chef" : "آشپز",
+          "Clown" : "دلقک",
+          "Curious Kid" : "کودک کنجکاو",
+          "Detective" : "کارآگاه",
+          "Doctor" : "دکتر",
+          "Don" : "دن",
+          "Genie" : "غول چراغ جادو",
+          "Grandma" : "مادربزرگ با اسلحه",
+          "Groom" : "داماد",
+          "Hit Man" : "آدم کش",
+          "Insane" : "دیوانه",
+          "Jailer" : "زندان بان",
+          "Judge" : "قاضی",
+          "Kind Wife" : "همسر مهربان",
+          "Lawyer" : "وکیل",
+          "Made Man" : "آدم اجیر کن",
+          "Mafia" : "مافیا",
+          "Magician" : "جادوگر",
+          "Miller" : "آسیابان",
+          "Postman" : "پست چی",
+          "Priest" : "کشیش",
+          "Rebel" : "شورشی",
+          "Reporter" : "خبرنگار",
+          "Resident" : "شهروند",
+          "Serial Killer" : "قاتل سریالی",
+          "Student" : "دانش آموز",
+          "Undercover Cop" : "پلیس مخفی"}
