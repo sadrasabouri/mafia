@@ -122,6 +122,29 @@ def help_me():
     exit()
 
 
+def give_me_roles(ordered_roles):
+    n = len(ordered_roles)
+    if n >= 14:
+        ordered_roles[11] = 'Kind Wife'
+        ordered_roles[12] = 'Groom'
+        ordered_roles[13] = 'Bride'
+    if n % 3 == 0:
+        try:
+            i = ordered_roles.index('Mafia')
+            ordered_roles[i] = 'Made Man'
+            ordered_roles[7] = 'Reporter'
+        except ValueError:
+            pass
+
+        try:
+            i = ordered_roles.index('Mafia')
+            if i > 12:
+                ordered_roles[i] = 'Serial Killer'
+        except ValueError:
+            pass
+    return ordered_roles
+
+
 if __name__ == "__main__":
     if len(argv) < 2 or argv[1] in ['--help', 'help', '-h']:
         help_me()
@@ -129,7 +152,7 @@ if __name__ == "__main__":
     if nPlayers > len(ordered_roles):
         print("Too many players, mafia doesn't support a game with", nPlayers, "player.")
         help_me()
-    roles = ordered_roles[:nPlayers]
+    roles = give_me_roles(ordered_roles[:nPlayers])
     shuffle(roles)
     chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789!@#$%^&*()"
     for i in range(4):
