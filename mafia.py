@@ -125,21 +125,22 @@ def help_me():
 def give_me_roles(ordered_roles):
     n = len(ordered_roles)
     if n >= 14:
-        ordered_roles[11] = 'Kind Wife'
         ordered_roles[12] = 'Groom'
         ordered_roles[13] = 'Bride'
-    if n % 3 == 0:
+        if n % 3 == 0:
+            ordered_roles[14] = 'Serial Killer'
+    if n % 3 != 0:
         try:
             i = ordered_roles.index('Mafia')
             ordered_roles[i] = 'Made Man'
             ordered_roles[7] = 'Reporter'
         except ValueError:
             pass
-
+    if n % 3 == 2:
         try:
             i = ordered_roles.index('Mafia')
             if i > 12:
-                ordered_roles[i] = 'Serial Killer'
+                ordered_roles[i] = 'Kind Wife'
         except ValueError:
             pass
     return ordered_roles
