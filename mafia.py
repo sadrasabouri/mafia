@@ -101,7 +101,7 @@ def GOD_PAGE():
         else:
             return render_template("404.html", is_farsi=True)
     return render_template("GOD.html", ip2role_index_name=ip2role_index_name,
-                           prompt_message=msg)
+                           prompt_message=msg, roles={role:roles.count(role) for role in set(roles)})
 
  
 @app.errorhandler(404) 

@@ -30,6 +30,16 @@
 {% endfor %}
 {% endblock %}
 
+{% block roles %}
+Game Roles:
+<br>
+{% for role in roles.keys() %}
+{{ role }} : {{ roles[role] }}
+<br>
+{% endfor %}
+<hr>
+{% endblock %}
+
 {% block messages %}
 {{ prompt_message }}
 {% endblock %}
