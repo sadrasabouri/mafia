@@ -4,6 +4,16 @@
 FekroBot::mafia::{{ role_name }}
 {% endblock %}
 
+{% block import %}
+<script>
+    var msg = "Hide your device! after clicking on OK your role will be shown.";
+{% if is_farsi == True %}
+    msg = "دستگاه خود را پنهان کنید! با زدن دکمه زیر نقش شما نشان داده خواهد شد.";
+{% endif %}
+    alert(msg);
+</script>
+{% endblock %}
+
 {% block avatar %}
 <img class="avatar" src="static/images/roles/{{ image_name }}.png">
 {% endblock %}
