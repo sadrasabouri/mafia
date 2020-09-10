@@ -23,6 +23,13 @@ h2 {
     margin: 0 0 0 0;
 }
 
+.table_header {
+    margin: 0 0 0 0;
+    margin-bottom: 10px;
+    padding: 0 0 0 0;
+    text-align: center;
+}
+
 p {
     font-size: 10px;
     color: rgb(163, 157, 150);
