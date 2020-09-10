@@ -1,0 +1,92 @@
+{% extends 'base_action.html' %}
+
+{% block Audio %}
+<audio id="kill">
+    <source src="static/voices/kill.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<audio id="ban">
+    <source src="static/voices/ban.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+{% endblock %}
+
+{% block sub_table_1 %}
+<h4 class="table_header">Players</h4>
+<tr>
+    <th class="action_table" id="is_comment">C</th>
+    <th class="action_table" id="player_name">Player Name</th>
+    <th class="action_table" id="player_role">Player Role</th>
+    <th class="action_table" id="actions" colspan="3">Actions</th>
+</tr>
+{% for ip in ip2role_index_name.keys() %}
+{% if ip2role_index_name[ip][3] == "alive" %}
+<tr class="{{ ip2role_index_name[ip][3] }}">
+    <td class="action_table" id="is_comment">{% if ip2role_index_name[ip][4] == True%}+{% endif %}</td>
+    <td class="action_table" id="player_name">{{ ip2role_index_name[ip][2] }}</td>
+    <td class="action_table" id="player_role"><p class="{{ role2team[ip2role_index_name[ip][0]] }}">{{ ip2role_index_name[ip][0] }}</p></td>
+        <td class="action_table"><a href="javascript:delay('/GOD?Ban={{ ip }}', 2000)" onclick="ban_sound_play()">Ban</a></td>
+        <td class="action_table"><a href="/GOD?Comment={{ ip }}">Comment</a></td>
+        <td class="action_table"><a href="javascript:delay('/GOD?Kill={{ ip }}', 1500)" onclick="kill_sound_play()">Kill</a></td>
+</tr>
+{% endif %}
+{% endfor %}
+
+{% for ip in ip2role_index_name.keys() %}
+{% if ip2role_index_name[ip][3] == "banned" %}
+<tr class="{{ ip2role_index_name[ip][3] }}">
+    <td class="action_table" id="is_comment">{% if ip2role_index_name[ip][4] == True%}+{% endif %}</td>
+    <td class="action_table" id="player_name">{{ ip2role_index_name[ip][2] }}</td>
+    <td class="action_table" id="player_role"><p class="{{ role2team[ip2role_index_name[ip][0]] }}">{{ ip2role_index_name[ip][0] }}</p></td>
+        <td class="action_table"><a href="javascript:delay('/GOD?Ban={{ ip }}', 2000)" onclick="ban_sound_play()">Ban</a></td>
+        <td class="action_table"><a href="/GOD?Comment={{ ip }}">Comment</a></td>
+        <td class="action_table"><a href="javascript:delay('/GOD?Kill={{ ip }}', 1500)" onclick="kill_sound_play()">Kill</a></td>
+</tr>
+{% endif %}
+{% endfor %}
+
+{% for ip in ip2role_index_name.keys() %}
+{% if ip2role_index_name[ip][3] == "dead" %}
+<tr class="{{ ip2role_index_name[ip][3] }}">
+    <td class="action_table" id="is_comment">{% if ip2role_index_name[ip][4] == True%}+{% endif %}</td>
+    <td class="action_table" id="player_name">{{ ip2role_index_name[ip][2] }}</td>
+    <td class="action_table" id="player_role"><p class="{{ role2team[ip2role_index_name[ip][0]] }}">{{ ip2role_index_name[ip][0] }}</p></td>
+        <td class="action_table"><a href="javascript:delay('/GOD?Ban={{ ip }}', 2000)" onclick="ban_sound_play()">Ban</a></td>
+        <td class="action_table"><a href="/GOD?Comment={{ ip }}">Comment</a></td>
+        <td class="action_table"><a href="javascript:delay('/GOD?Kill={{ ip }}', 1500)" onclick="kill_sound_play()">Kill</a></td>
+</tr>
+{% endif %}
+{% endfor %}
+{% endblock %}
+
+{% block sub_table_2 %}
+<hr>
+<h4 class="table_header">Comments</h4>
+<tr>
+    <th class="action_table" id="is_comment">#</th>
+    <th class="action_table" id="player_name">Player Name</th>
+    <th class="action_table" id="player_role">Player Role</th>
+</tr>
+{% for ip in comments %}
+<tr class="{{ ip2role_index_name[ip][3] }}">
+    <td class="action_table" id="is_comment">{{ comments.index(ip) + 1 }}</td>
+    <td class="action_table" id="player_name">{{ ip2role_index_name[ip][2] }}</td>
+    <td class="action_table" id="player_role"><p class="{{ role2team[ip2role_index_name[ip][0]] }}">{{ ip2role_index_name[ip][0] }}</p></td>
+</tr>
+{% endfor %}
+{% endblock %}
+
+{% block roles %}
+<hr>
+<h4 class="table_header">Game Roles</h4>
+{% for role in roles.keys() %}
+<p class="{{ role2team[role] }}">
+{{ role }} : {{ roles[role] }}
+</p>
+{% endfor %}
+<hr>
+{% endblock %}
+
+{% block messages %}
+{{ prompt_message }}
+{% endblock %}

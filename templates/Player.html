@@ -1,0 +1,31 @@
+{% extends 'base_action.html' %}
+
+{% block Audio %}
+<audio id="beep">
+    <source src="static/voices/beep.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+{% endblock %}
+
+{% block sub_table_1 %}
+<tr>
+    <td class="role">
+    <h1>{{ player[2] }}</h1>
+    </td>
+</tr>
+<tr>
+    <td>
+    {% if player[3] == "alive" %}
+    <img class="avatar" src="static/images/Warns/play.png" onclick="start()">
+    <div id="myProgress">
+        <div id="myBar">0</div>
+    </div>
+    {% endif %}
+    {% if player[3] == "dead" %}You are Killed!{% endif %}
+    {% if player[3] == "banned" %}You are Banned from speaking this turn!{% endif %}
+    </td>
+</tr>
+{% endblock %}
+
+{% block messages %}
+{% endblock %}

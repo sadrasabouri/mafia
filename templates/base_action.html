@@ -1,0 +1,22 @@
+<!doctype html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel = "icon" href="static/images/roles/{{ image_name }}.png" type = "image/x-icon"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="static/js/main.js"></script>
+</head>
+<body>
+{% block Audio %}
+{% endblock %}
+<table style="border-collapse: collapse">
+    {% block sub_table_1 %}{% endblock %}
+</table>
+<table style="border-collapse: collapse">
+    {% block sub_table_2 %}{% endblock %}
+</table>
+{% block roles %}
+{% endblock %}
+{% block messages %}
+{% endblock %}
+</body>
