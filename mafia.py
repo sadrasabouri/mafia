@@ -1,5 +1,5 @@
 from sys import argv
-from random import randrange, shuffle, sample
+from random import randrange, shuffle
 from flask import Flask, render_template, url_for, request
 from flask_httpauth import HTTPBasicAuth
 from mafia_params import *
