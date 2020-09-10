@@ -133,7 +133,7 @@ def give_me_roles(ordered_roles):
         try:
             i = ordered_roles.index('Mafia')
             ordered_roles[i] = 'Made Man'
-            ordered_roles[7] = 'Reporter'
+            ordered_roles[2] = 'Reporter'
         except ValueError:
             pass
     if n % 3 == 2:
