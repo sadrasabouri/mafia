@@ -72,6 +72,21 @@ th, td {
     background-color: red;
 }
 
+.mafia {
+    font-size: 20px;
+    color: #cf3232;
+}
+
+.city {
+    font-size: 20px;
+    color: #3283cf;
+}
+
+.serial_killer {
+    font-size: 20px;
+    color: #784e88;
+}
+
 #myProgress {
     width: 100%;
     background-color: #ddd;

@@ -80,8 +80,9 @@
 <hr>
 <h4 class="table_header">Game Roles</h4>
 {% for role in roles.keys() %}
+<p class="{{ role2team[role] }}">
 {{ role }} : {{ roles[role] }}
-<br>
+</p>
 {% endfor %}
 <hr>
 {% endblock %}
