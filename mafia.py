@@ -29,7 +29,7 @@ def index():
     role = ""
     image_name = ""
     ip = str(request.remote_addr)
-    
+
     if ip in ip2role_index_name.keys():
         return render_template("Player.html", player=ip2role_index_name[ip])
     else:
