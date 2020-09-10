@@ -24,7 +24,7 @@
 <tr class="{{ ip2role_index_name[ip][3] }}">
     <td class="action_table" id="is_comment">{% if ip2role_index_name[ip][4] == True%}+{% endif %}</td>
     <td class="action_table" id="player_name">{{ ip2role_index_name[ip][2] }}</td>
-    <td class="action_table" id="player_role">{{ ip2role_index_name[ip][0] }}</td>
+    <td class="action_table" id="player_role"><p class="{{ role2team[ip2role_index_name[ip][0]] }}">{{ ip2role_index_name[ip][0] }}</p></td>
         <td class="action_table"><a href="javascript:delay('/GOD?Ban={{ ip }}', 2000)" onclick="ban_sound_play()">Ban</a></td>
         <td class="action_table"><a href="/GOD?Comment={{ ip }}">Comment</a></td>
         <td class="action_table"><a href="javascript:delay('/GOD?Kill={{ ip }}', 1500)" onclick="kill_sound_play()">Kill</a></td>
@@ -37,7 +37,7 @@
 <tr class="{{ ip2role_index_name[ip][3] }}">
     <td class="action_table" id="is_comment">{% if ip2role_index_name[ip][4] == True%}+{% endif %}</td>
     <td class="action_table" id="player_name">{{ ip2role_index_name[ip][2] }}</td>
-    <td class="action_table" id="player_role">{{ ip2role_index_name[ip][0] }}</td>
+    <td class="action_table" id="player_role"><p class="{{ role2team[ip2role_index_name[ip][0]] }}">{{ ip2role_index_name[ip][0] }}</p></td>
         <td class="action_table"><a href="javascript:delay('/GOD?Ban={{ ip }}', 2000)" onclick="ban_sound_play()">Ban</a></td>
         <td class="action_table"><a href="/GOD?Comment={{ ip }}">Comment</a></td>
         <td class="action_table"><a href="javascript:delay('/GOD?Kill={{ ip }}', 1500)" onclick="kill_sound_play()">Kill</a></td>
@@ -50,7 +50,7 @@
 <tr class="{{ ip2role_index_name[ip][3] }}">
     <td class="action_table" id="is_comment">{% if ip2role_index_name[ip][4] == True%}+{% endif %}</td>
     <td class="action_table" id="player_name">{{ ip2role_index_name[ip][2] }}</td>
-    <td class="action_table" id="player_role">{{ ip2role_index_name[ip][0] }}</td>
+    <td class="action_table" id="player_role"><p class="{{ role2team[ip2role_index_name[ip][0]] }}">{{ ip2role_index_name[ip][0] }}</p></td>
         <td class="action_table"><a href="javascript:delay('/GOD?Ban={{ ip }}', 2000)" onclick="ban_sound_play()">Ban</a></td>
         <td class="action_table"><a href="/GOD?Comment={{ ip }}">Comment</a></td>
         <td class="action_table"><a href="javascript:delay('/GOD?Kill={{ ip }}', 1500)" onclick="kill_sound_play()">Kill</a></td>
@@ -71,7 +71,7 @@
 <tr class="{{ ip2role_index_name[ip][3] }}">
     <td class="action_table" id="is_comment">{{ comments.index(ip) + 1 }}</td>
     <td class="action_table" id="player_name">{{ ip2role_index_name[ip][2] }}</td>
-    <td class="action_table" id="player_role">{{ ip2role_index_name[ip][0] }}</td>
+    <td class="action_table" id="player_role"><p class="{{ role2team[ip2role_index_name[ip][0]] }}">{{ ip2role_index_name[ip][0] }}</p></td>
 </tr>
 {% endfor %}
 {% endblock %}
