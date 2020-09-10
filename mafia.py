@@ -98,6 +98,7 @@ def GOD_PAGE():
                     msg = "Error: Out of Comments."
             else:
                 ip2role_index_name[ip][4] = False
+                nComments -= 1
         else:
             return render_template("404.html", is_farsi=True)
     return render_template("GOD.html", ip2role_index_name=ip2role_index_name,
