@@ -29,11 +29,6 @@ def index():
     role = ""
     image_name = ""
     ip = str(request.remote_addr)
-
-    if id == 0:
-        print("_" * 20 + "GOD's password" + "_" * 20)
-        print(preshared_key)
-        print("_" * 54)
     
     if ip in ip2role_index_name.keys():
         return render_template("Player.html", player=ip2role_index_name[ip])
@@ -163,6 +158,10 @@ if __name__ == "__main__":
     chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789!@#$%^&*()"
     for i in range(4):
         preshared_key += chars[randrange(0, len(chars))]
-    app.run(host="0.0.0.0", \
-            port=5000, \
-            debug=True)
+    print("_" * 20 + "GOD's password" + "_" * 20)
+    print(preshared_key)
+    print("_" * 54)
+    app.run(host="0.0.0.0",
+            port=5000,
+            debug=True,
+            use_reloader=False)
