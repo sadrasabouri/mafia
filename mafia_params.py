@@ -64,6 +64,39 @@ nRoles = {"Boxer" : 2,
           "Undercover Cop" : 2
           }
 
+role2team = {"Boxer" : "mafia",
+          "Bride" : "city",
+          "Bulletproof" : "city",
+          "Bus Driver" : "city",
+          "Chef" : "city",
+          "Clown" : "city",
+          "Curious Kid" : "city",
+          "Detective" : "city",
+          "Doctor" : "city",
+          "Don" : "mafia",
+          "Genie" : "city",
+          "Grandma" : "city",
+          "Groom" : "city",
+          "Hit Man" : "mafia",
+          "Insane" : "city",
+          "Jailer" : "city",
+          "Judge" : "city",
+          "Kind Wife" : "mafia",
+          "Lawyer" : "mafia",
+          "Made Man" : "mafia",
+          "Mafia" : "mafia",
+          "Magician" : "city",
+          "Miller" : "city",
+          "Postman" : "city",
+          "Priest" : "city",
+          "Rebel" : "city",
+          "Reporter" : "city",
+          "Resident" : "city",
+          "Serial Killer" : "serial_killer",
+          "Student" : "city",
+          "Undercover Cop" : "city"
+          }
+
 descriptions = {"Boxor" : "Boxor is a member of mafia team. Boxor hits one of the players at night and the one"
                           " who hited Can't deffend oneself during day phase due to it's hit effect.",
                 "Bride" : "Bride is a member of city team. Bride has been engaged to Groom recently at nigh both of"
