@@ -61,7 +61,7 @@ def index():
 
 @auth_GOD.verify_password
 def verify_password_god(username, password):
-    if username == "GOD" and password == preshared_key:
+    if password == preshared_key:
         return username
 
 
