@@ -13,6 +13,7 @@ nPlayers = 0
 roles = []
 ip2role_index_name = {}
 nComments = 0
+comments_ordered = []
 
 @auth.verify_password
 def verify_password(username, password):
@@ -67,7 +68,7 @@ def verify_password_god(username, password):
 @app.route('/GOD')
 @auth_GOD.login_required
 def GOD_PAGE():
-    global ip2role_index_name, nComments
+    global ip2role_index_name, nComments, comments_ordered
     msg = ""
     if request.args.get("Kill") is not None:
         ip = request.args.get("Kill")
@@ -94,15 +95,18 @@ def GOD_PAGE():
                 if nComments <= nPlayers // 3:
                     ip2role_index_name[ip][4] = True
                     nComments += 1
+                    comments_ordered.append(ip)
                 else:
                     msg = "Error: Out of Comments."
             else:
                 ip2role_index_name[ip][4] = False
                 nComments -= 1
+                comments_ordered.remove(ip)
         else:
             return render_template("404.html", is_farsi=True)
     return render_template("GOD.html", ip2role_index_name=ip2role_index_name,
-                           prompt_message=msg, roles={role:roles.count(role) for role in set(roles)})
+                           prompt_message=msg, roles={role:roles.count(role) for role in set(roles)},
+                           comments=comments_ordered)
 
  
 @app.errorhandler(404) 
