@@ -27,7 +27,7 @@ ordered_roles = ["Resident",
                  "Mafia",
                  "Clown",
                  "Resident",
-                 "Mafia"
+                 "Mafia",
                  "Resident",
                  "Resident"]
 
