@@ -122,6 +122,13 @@ def help_me():
 
 
 def give_me_roles(ordered_roles):
+    """
+    Check the number of players and roles.
+
+    :param ordered_roles: ordered roles
+    :type ordered_roles: list
+    :return: a valid list for roles
+    """
     n = len(ordered_roles)
     if n >= 14:
         ordered_roles[12] = 'Groom'
