@@ -33,7 +33,7 @@ def index():
     if ip in ip2role_index_name.keys():
         return render_template("Player.html", player=ip2role_index_name[ip])
     else:
-        if id > nPlayers:
+        if id >= nPlayers:
             return render_template("404.html", is_farsi=True)
         role = roles[id]
         ip2role_index_name[ip] = [role,
