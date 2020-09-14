@@ -12,8 +12,7 @@ preshared_key = ""
 id = 0
 nPlayers = 0
 roles = []
-#ip2role_index_name = {}
-ip2players = {}
+ip2player = {}
 nComments = 0
 comments_ordered = []
 
@@ -26,25 +25,20 @@ def verify_password(username, password):
 @app.route('/')
 @auth.login_required
 def index():
-    global id, ip2players
+    global id, ip2player
     username = str(auth.current_user())
     role = ""
     image_name = ""
     ip = str(request.remote_addr)
 
-    if ip in ip2players.keys():
-        return render_template("Player.html", player=ip2players[ip])
+    if ip in ip2player.keys():
+        return render_template("Player.html", player=ip2player[ip])
     else:
         if id > nPlayers:
             return render_template("404.html", is_farsi=True)
         role = roles[id]
-        """ip2role_index_name[ip] = [role,
-                                  str(randrange(1, nRoles[role] + 1)),
-                                  username,
-                                  "alive",
-                                  False]"""
         image_name = role + "_" + str(randrange(1, nRoles[role] + 1))
-        ip2players[ip] = Player(ip, username, role, image_name)
+        ip2player[ip] = Player(ip, username, role, image_name)
         print("*" * 20, "New Player","*" * 20)
         toGod = ip + " : " + str(id) + " : " + username +  " --> " + role
         toGod += "/" + role2fa[role]    #TODO: Just in Farsi Mode
@@ -66,43 +60,43 @@ def verify_password_god(username, password):
 @app.route('/GOD')
 @auth_GOD.login_required
 def GOD_PAGE():
-    global ip2players, nComments, comments_ordered
+    global ip2player, nComments, comments_ordered
     msg = ""
     if request.args.get("Kill") is not None:
         ip = request.args.get("Kill")
-        if ip in ip2players.keys():
-            if ip2players[ip].get_state() == "alive":
-                ip2players[ip].set_state("dead")
+        if ip in ip2player.keys():
+            if ip2player[ip].get_state() == "alive":
+                ip2player[ip].set_state("dead")
             else:
-                ip2players[ip].set_state("alive")
+                ip2player[ip].set_state("alive")
         else:
             return render_template("404.html", is_farsi=True)
     if request.args.get("Ban") is not None:
         ip = request.args.get("Ban")
-        if ip in ip2players.keys():
-            if ip2players[ip].get_state() == "alive":
-                ip2players[ip].set_state("banned")
-            elif ip2players[ip].get_state() == "banned":
-                ip2players[ip].set_state("alive")
+        if ip in ip2player.keys():
+            if ip2player[ip].get_state() == "alive":
+                ip2player[ip].set_state("banned")
+            elif ip2player[ip].get_state() == "banned":
+                ip2player[ip].set_state("alive")
         else:
             return render_template("404.html", is_farsi=True)
     if request.args.get("Comment") is not None:
         ip = request.args.get("Comment")
-        if ip in ip2players.keys():
-            if ip2players[ip].get_comment() == False:
+        if ip in ip2player.keys():
+            if ip2player[ip].get_comment() == False:
                 if nComments <= nPlayers // 3:
-                    ip2players[ip].set_comment(True)
+                    ip2player[ip].set_comment(True)
                     nComments += 1
                     comments_ordered.append(ip)
                 else:
                     msg = "Error: Out of Comments."
             else:
-                ip2players[ip].set_comment(False)
+                ip2player[ip].set_comment(False)
                 nComments -= 1
                 comments_ordered.remove(ip)
         else:
             return render_template("404.html", is_farsi=True)
-    return render_template("GOD.html", ip2players=ip2players,
+    return render_template("GOD.html", ip2player=ip2player,
                            prompt_message=msg, roles={role:roles.count(role) for role in set(roles)},
                            comments=comments_ordered, role2team=role2team)
 
