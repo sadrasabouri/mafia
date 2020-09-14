@@ -2,13 +2,13 @@ from sys import argv
 from random import randrange, shuffle
 from flask import Flask, render_template, url_for, request
 from flask_httpauth import HTTPBasicAuth
-from mafia_params import *
+from mafia_params import ordered_roles, nRoles, role2team, descriptions, descriptions_fa, role2fa
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
 auth_GOD = HTTPBasicAuth()
 preshared_key = ""
-id = 0
+player_id = 0
 nPlayers = 0
 roles = []
 ip2role_index_name = {}
@@ -24,7 +24,7 @@ def verify_password(username, password):
 @app.route('/')
 @auth.login_required
 def index():
-    global id, ip2role_index_name
+    global player_id, ip2role_index_name
     username = str(auth.current_user())
     role = ""
     image_name = ""
@@ -32,21 +32,20 @@ def index():
 
     if ip in ip2role_index_name.keys():
         return render_template("Player.html", player=ip2role_index_name[ip])
-    else:
-        if id >= nPlayers:
-            return render_template("404.html", is_farsi=True)
-        role = roles[id]
-        ip2role_index_name[ip] = [role,
-                                  str(randrange(1, nRoles[role] + 1)),
-                                  username,
-                                  "alive",
-                                  False]
-        image_name = role + "_" + str(ip2role_index_name[ip][1])
-        print("*" * 20, "New Player","*" * 20)
-        toGod = ip + " : " + str(id) + " : " + username +  " --> " + role
-        toGod += "/" + role2fa[role]    #TODO: Just in Farsi Mode
-        print(toGod)
-        id += 1
+    if player_id >= nPlayers:
+        return render_template("404.html", is_farsi=True)
+    role = roles[player_id]
+    ip2role_index_name[ip] = [role,
+                                str(randrange(1, nRoles[role] + 1)),
+                                username,
+                                "alive",
+                                False]
+    image_name = role + "_" + str(ip2role_index_name[ip][1])
+    print("*" * 20, "New Player","*" * 20)
+    toGod = ip + " : " + str(player_id) + " : " + username +  " --> " + role
+    toGod += "/" + role2fa[role]
+    print(toGod)
+    player_id += 1
     return render_template("index.html",
                             image_name=image_name,
                             role_name=role, role_name_fa=role2fa[role],
@@ -86,7 +85,7 @@ def GOD_PAGE():
     if request.args.get("Comment") is not None:
         ip = request.args.get("Comment")
         if ip in ip2role_index_name.keys():
-            if ip2role_index_name[ip][4] == False:
+            if ip2role_index_name[ip][4] is False:
                 if nComments <= nPlayers // 3:
                     ip2role_index_name[ip][4] = True
                     nComments += 1
@@ -162,5 +161,4 @@ if __name__ == "__main__":
     print("_" * 54)
     app.run(host="0.0.0.0",
             port=5000,
-            debug=True,
             use_reloader=False)
