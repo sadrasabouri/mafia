@@ -2,7 +2,7 @@ from sys import argv
 from random import randrange, shuffle
 from flask import Flask, render_template, url_for, request
 from flask_httpauth import HTTPBasicAuth
-from mafia_params import *
+from mafia_params import ordered_roles, nRoles, role2team, descriptions, descriptions_fa, role2fa
 from player import Player
 
 app = Flask(__name__)
@@ -25,7 +25,7 @@ def verify_password(username, password):
 @app.route('/')
 @auth.login_required
 def index():
-    global id, ip2player
+    global player_id, ip2player
     username = str(auth.current_user())
     role = ""
     image_name = ""
@@ -34,16 +34,16 @@ def index():
     if ip in ip2player.keys():
         return render_template("Player.html", player=ip2player[ip])
     else:
-        if id > nPlayers:
+        if player_id > nPlayers:
             return render_template("404.html", is_farsi=True)
-        role = roles[id]
+        role = roles[player_id]
         image_name = role + "_" + str(randrange(1, nRoles[role] + 1))
         ip2player[ip] = Player(ip, username, role, image_name)
         print("*" * 20, "New Player","*" * 20)
-        toGod = ip + " : " + str(id) + " : " + username +  " --> " + role
+        toGod = ip + " : " + str(player_id) + " : " + username +  " --> " + role
         toGod += "/" + role2fa[role]    #TODO: Just in Farsi Mode
         print(toGod)
-        id += 1
+        player_id += 1
     return render_template("index.html",
                             image_name=image_name,
                             role_name=role, role_name_fa=role2fa[role],
@@ -83,7 +83,7 @@ def GOD_PAGE():
     if request.args.get("Comment") is not None:
         ip = request.args.get("Comment")
         if ip in ip2player.keys():
-            if ip2player[ip].get_comment() == False:
+            if ip2player[ip].get_comment() is False:
                 if nComments <= nPlayers // 3:
                     ip2player[ip].set_comment(True)
                     nComments += 1
