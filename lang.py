@@ -1,7 +1,7 @@
-
+from typing import Dict, List
 from Role import Role
 from dataclasses import dataclass
-from config_loader import load_data
+from config import load_data
 
 @dataclass
 class LanguageService:
@@ -15,6 +15,13 @@ class LanguageService:
 
     def get_description(self, key : Role) -> str:
         return self._data.get("descriptions").get(key.name)
+    
+    # TODO: remove these after refactoring mafia.py
+    def get_name_dict(self) -> Dict[str, str]:
+        return self._data.get("names");
+
+    def get_description_dict(self) -> Dict[str, str]:
+        return self._data.get("descriptions")
 
 english : LanguageService = LanguageService('english.json')
 persian : LanguageService = LanguageService('persian.json')

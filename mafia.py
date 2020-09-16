@@ -76,13 +76,14 @@ def god_page():
         player.switch_ban()
 
     def comment(player : Player) -> None:
+        global nComments, comments_ordered
+        
         if nComments > max_comments(nPlayers):
             nonlocal msg
             msg = "Error: Out of Comments."
             return
 
         if player.get_comment() is False:
-            global nComments, comments_ordered
             player.set_comment(True)
             nComments += 1
             comments_ordered.append(player.get_ip())
