@@ -10,10 +10,12 @@ app = Flask(__name__)
 auth = HTTPBasicAuth()
 auth_GOD = HTTPBasicAuth()
 preshared_key = ""
+
+ip2player = {}
+roles = []
 player_id = 0
 nPlayers = 0
-roles = []
-ip2player = {}
+
 nComments = 0
 comments_ordered = []
 
@@ -21,43 +23,46 @@ comments_ordered = []
 def verify_password(username, password):
     if len(username) > 0:
         return username
-    return None
 
 @app.route('/')
 @auth.login_required
 def index():
-    global player_id, ip2player
     username = str(auth.current_user())
-    role = ""
-    image_name = ""
     ip = str(request.remote_addr)
 
+    # redirect current players
     if ip in ip2player.keys():
         return render_template("Player.html", player=ip2player[ip])
 
+    # reject excess players
+    global player_id
     if player_id > nPlayers:
         return not_found_page()
 
+    # create new player
     role = roles[player_id]
     image_name = role + "_" + str(randrange(1, nRoles[role] + 1))
     ip2player[ip] = Player(ip, username, role, image_name)
+    
+    # next player id
+    player_id += 1 
+    
+    # log new player
     print("*" * 20, "New Player","*" * 20)
-    toGod = ip + " : " + str(player_id) + " : " + username +  " --> " + role
-    toGod += "/" + role2fa[role]    #TODO: Just in Farsi Mode
-    print(toGod)
-    player_id += 1
+    to_god = ip + " : " + str(player_id) + " : " + username +  " --> " + role
+    to_god += "/" + role2fa[role]    #TODO: Just in Farsi Mode
+    print(to_god)
+
     return render_template("index.html",
                             image_name=image_name,
                             role_name=role, role_name_fa=role2fa[role],
                             description=descriptions[role], description_fa=descriptions_fa[role],
                             is_farsi=True)
 
-
 @auth_GOD.verify_password
 def verify_password_god(username, password):
     if password == preshared_key:
         return username
-
 
 @app.route('/GOD')
 @auth_GOD.login_required
@@ -139,7 +144,6 @@ def help_me():
     usage += "here at : https://github.com/sadrasabouri/mafia/issues"
     print(usage)
     exit()
-
 
 def give_me_roles(ordered_roles):
     """
