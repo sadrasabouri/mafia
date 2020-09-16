@@ -7,7 +7,6 @@ data = load_data("mafia_param.json")
 
 ordered_roles = data.get("ordered_roles")
 nRoles = data.get("nRoles")
-role2team = data.get("role2team")
 
 # descriptions = english.get_description_dict()
 # role2fa = persian.get_name_dict()

@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 from mimetypes import init
 import mafia_params
 import lang
+import enum
 
 @dataclass
 class Team:
@@ -10,16 +11,10 @@ class Team:
     def __repr__(self) -> str:
         return self.name.capitalize()
 
-def get_team(s : str) -> Team:
-    return Team(mafia_params.role2team[s])
-
-@dataclass(frozen= False)
+@dataclass(frozen= True)
 class Role:
     name : str
-    team : Team = field(default= None)
-
-    def __post_init__(self):
-        self.team = get_team(self.name)
+    team : Team
 
     def get_name(self, is_farsi : bool = False):
         if is_farsi:
@@ -38,3 +33,37 @@ class Role:
 MAFIA = Team("mafia")
 CITY = Team("city")
 SERIAL_KILLER = Team("serial_killer")
+
+#Roles initiation
+class Roles(enum.Enum):
+    BOXER = Role("Boxer", MAFIA)
+    BRIDE = Role("Bride", CITY)
+    BULLETPROOF = Role("Bulletproof", CITY)
+    BUS_DRIVER = Role("Bus Driver", CITY)
+    CHEF = Role("Chef", CITY)
+    CLOWN = Role("Clown", CITY)
+    CURIOUS_KID = Role("Curious Kid", CITY)
+    DETECTIVE = Role("Detective", CITY)
+    DOCTOR = Role("Doctor" , CITY)
+    DON = Role("Don", MAFIA)
+    GENIE = Role("Genie", CITY)
+    GRANDMA = Role("Grandma", CITY)
+    GROOM = Role("Groom", CITY)
+    HIT_MAN = Role("Hit Man", MAFIA)
+    INSANE = Role("Insane", CITY)
+    JAILER = Role("Jailer", CITY)
+    JUDGE = Role("Judge", CITY)
+    KIND_WIFE = Role("Kind Wife", MAFIA)
+    LAWYER = Role("Lawyer", MAFIA)
+    MADE_MAN = Role("Made Man", MAFIA)
+    MAFIA = Role("Mafia", MAFIA)
+    MAGICIAN = Role("Magician", CITY)
+    MILLER = Role("Miller", CITY)
+    POSTMAN = Role("Postman", CITY)
+    PRIEST = Role("Priest", CITY)
+    REBEL = Role("Rebel", CITY)
+    REPORTER = Role("Reporter", CITY)
+    RESIDENT = Role("Resident" , CITY)
+    SERIAL_KILLER = Role("Serial Killer", SERIAL_KILLER)
+    STUDENT = Role("Student", CITY)
+    UNDER_COVER_COP = Role("Undercover Cop", CITY)
