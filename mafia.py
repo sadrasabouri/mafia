@@ -1,5 +1,6 @@
 from sys import argv
 from random import randrange, shuffle
+from typing import Text
 from flask import Flask, render_template, url_for, request
 from flask_httpauth import HTTPBasicAuth
 from mafia_params import ordered_roles, nRoles, role2team, descriptions, descriptions_fa, role2fa
@@ -35,7 +36,7 @@ def index():
         return render_template("Player.html", player=ip2player[ip])
     else:
         if player_id > nPlayers:
-            return render_template("404.html", is_farsi=True)
+            return not_found_page()
         role = roles[player_id]
         image_name = role + "_" + str(randrange(1, nRoles[role] + 1))
         ip2player[ip] = Player(ip, username, role, image_name)
@@ -70,7 +71,7 @@ def GOD_PAGE():
             else:
                 ip2player[ip].set_state("alive")
         else:
-            return render_template("404.html", is_farsi=True)
+            return not_found_page()
     if request.args.get("Ban") is not None:
         ip = request.args.get("Ban")
         if ip in ip2player.keys():
@@ -79,7 +80,7 @@ def GOD_PAGE():
             elif ip2player[ip].get_state() == "banned":
                 ip2player[ip].set_state("alive")
         else:
-            return render_template("404.html", is_farsi=True)
+            return not_found_page()
     if request.args.get("Comment") is not None:
         ip = request.args.get("Comment")
         if ip in ip2player.keys():
@@ -95,7 +96,7 @@ def GOD_PAGE():
                 nComments -= 1
                 comments_ordered.remove(ip)
         else:
-            return render_template("404.html", is_farsi=True)
+            return not_found_page()
     return render_template("GOD.html", ip2player=ip2player,
                            prompt_message=msg, roles={role:roles.count(role) for role in set(roles)},
                            comments=comments_ordered, role2team=role2team)
@@ -103,8 +104,10 @@ def GOD_PAGE():
  
 @app.errorhandler(404) 
 def invalid_route(e):
-    return render_template("404.html", is_farsi=True)
+    return not_found_page()
 
+def not_found_page() -> Text:
+    return render_template("404.html", is_farsi=True)
 
 def help_me():
     usage = "-" * 70 + "\n"
