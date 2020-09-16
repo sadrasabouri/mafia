@@ -34,17 +34,18 @@ def index():
 
     if ip in ip2player.keys():
         return render_template("Player.html", player=ip2player[ip])
-    else:
-        if player_id > nPlayers:
-            return not_found_page()
-        role = roles[player_id]
-        image_name = role + "_" + str(randrange(1, nRoles[role] + 1))
-        ip2player[ip] = Player(ip, username, role, image_name)
-        print("*" * 20, "New Player","*" * 20)
-        toGod = ip + " : " + str(player_id) + " : " + username +  " --> " + role
-        toGod += "/" + role2fa[role]    #TODO: Just in Farsi Mode
-        print(toGod)
-        player_id += 1
+
+    if player_id > nPlayers:
+        return not_found_page()
+
+    role = roles[player_id]
+    image_name = role + "_" + str(randrange(1, nRoles[role] + 1))
+    ip2player[ip] = Player(ip, username, role, image_name)
+    print("*" * 20, "New Player","*" * 20)
+    toGod = ip + " : " + str(player_id) + " : " + username +  " --> " + role
+    toGod += "/" + role2fa[role]    #TODO: Just in Farsi Mode
+    print(toGod)
+    player_id += 1
     return render_template("index.html",
                             image_name=image_name,
                             role_name=role, role_name_fa=role2fa[role],
@@ -169,22 +170,32 @@ def give_me_roles(ordered_roles):
             pass
     return ordered_roles
 
+def gen_preshared_key() -> str:
+    key = ""
+    chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789!@#$%^&*()"
+    for _ in range(4):
+        key += chars[randrange(0, len(chars))]
+    return key
 
 if __name__ == "__main__":
+    # parse args
     if len(argv) < 2 or argv[1] in ['--help', 'help', '-h']:
         help_me()
     nPlayers = int(argv[1])
+
+    # make roles
     if nPlayers > len(ordered_roles):
         print("Too many players, mafia doesn't support a game with", nPlayers, "player.")
         help_me()
     roles = give_me_roles(ordered_roles[:nPlayers])
     shuffle(roles)
-    chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789!@#$%^&*()"
-    for i in range(4):
-        preshared_key += chars[randrange(0, len(chars))]
+    
+    # preshared key generation
+    preshared_key = gen_preshared_key()
     print("_" * 20 + "GOD's password" + "_" * 20)
     print(preshared_key)
     print("_" * 54)
+
     app.run(host="0.0.0.0",
             port=5000,
             use_reloader=False)
