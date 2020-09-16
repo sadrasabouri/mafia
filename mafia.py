@@ -1,6 +1,6 @@
 from sys import argv
 from random import randrange, shuffle
-from typing import Text
+from typing import Callable, Dict, Text
 from flask import Flask, render_template, url_for, request
 from flask_httpauth import HTTPBasicAuth
 from mafia_params import ordered_roles, nRoles, role2team, descriptions, descriptions_fa, role2fa
@@ -61,42 +61,56 @@ def verify_password_god(username, password):
 @app.route('/GOD')
 @auth_GOD.login_required
 def GOD_PAGE():
-    global ip2player, nComments, comments_ordered
+    global ip2player
+    
+    #get ip or throw 404
+    ip = None
+    req = None
+    for key in ["Kill", "Ban", "Comment"]:
+        ip = request.args.get(key)
+        if ip is not None and ip in ip2player.keys():
+            req = key
+            break
+        else: return not_found_page()
+
     msg = ""
-    if request.args.get("Kill") is not None:
-        ip = request.args.get("Kill")
-        if ip in ip2player.keys():
-            if ip2player[ip].get_state() == "alive":
+   
+    def kill() -> None:
+        if ip2player[ip].get_state() == "alive":
                 ip2player[ip].set_state("dead")
-            else:
-                ip2player[ip].set_state("alive")
         else:
-            return not_found_page()
-    if request.args.get("Ban") is not None:
-        ip = request.args.get("Ban")
-        if ip in ip2player.keys():
-            if ip2player[ip].get_state() == "alive":
+            ip2player[ip].set_state("alive")
+
+    def ban() -> None:
+        
+        if ip2player[ip].get_state() == "alive":
                 ip2player[ip].set_state("banned")
-            elif ip2player[ip].get_state() == "banned":
-                ip2player[ip].set_state("alive")
-        else:
-            return not_found_page()
-    if request.args.get("Comment") is not None:
-        ip = request.args.get("Comment")
-        if ip in ip2player.keys():
-            if ip2player[ip].get_comment() is False:
-                if nComments <= nPlayers // 3:
-                    ip2player[ip].set_comment(True)
-                    nComments += 1
-                    comments_ordered.append(ip)
-                else:
-                    msg = "Error: Out of Comments."
+        elif ip2player[ip].get_state() == "banned":
+            ip2player[ip].set_state("alive")
+
+    def comment() -> None:
+        if ip2player[ip].get_comment() is False:
+            global nComments, comments_ordered
+            if nComments <= nPlayers // 3:
+                ip2player[ip].set_comment(True)
+                nComments += 1
+                comments_ordered.append(ip)
             else:
-                ip2player[ip].set_comment(False)
-                nComments -= 1
-                comments_ordered.remove(ip)
+                nonlocal msg
+                msg = "Error: Out of Comments."
         else:
-            return not_found_page()
+            ip2player[ip].set_comment(False)
+            nComments -= 1
+            comments_ordered.remove(ip)
+
+    request_mapper : Dict[Callable] = {
+        "Kill", kill,
+        "Ban", ban,
+        "Comment", comment
+    }
+
+    request_mapper[req]()
+      
     return render_template("GOD.html", ip2player=ip2player,
                            prompt_message=msg, roles={role:roles.count(role) for role in set(roles)},
                            comments=comments_ordered, role2team=role2team)
