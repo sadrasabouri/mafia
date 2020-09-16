@@ -1,5 +1,7 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from mimetypes import init
 import mafia_params
+import lang
 
 @dataclass
 class Team:
@@ -8,15 +10,26 @@ class Team:
     def __repr__(self) -> str:
         return self.name.capitalize()
 
-@dataclass(frozen= True)
+def get_team(s : str) -> Team:
+    return Team(mafia_params.role2team[s])
+
+@dataclass(frozen= False)
 class Role:
     name : str
-    team : Team
+    team : Team = field(default= None)
 
-    def get_description(self, is_english : bool = True) -> str:
-        if (is_english):
-            return mafia_params.descriptions.get(self.name)
-        return mafia_params.descriptions_fa.get(self.name)
+    def __post_init__(self):
+        self.team = get_team(self.name)
+
+    def get_name(self, is_farsi : bool = False):
+        if is_farsi:
+            return lang.persian.get_name(self.name)
+        return self.name
+
+    def get_description(self, is_farsi : bool = False) -> str:
+        if is_farsi:
+            return lang.persian.get_description(self.name)
+        return lang.english.get_description(self.name)
 
     def is_mafia(self) -> bool:
         return self.team == MAFIA
@@ -24,7 +37,4 @@ class Role:
 # Teams initiation
 MAFIA = Team("mafia")
 CITY = Team("city")
-
-#Roles initiation
-RESIDENT = Role("Resident", CITY)
-MAFIA = Role("Mafia", MAFIA)
+SERIAL_KILLER = Team("serial_killer")

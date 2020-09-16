@@ -7,7 +7,7 @@ class PlayerState:
     BANNED: str = "banned"
     all: List[str] = [ALIVE, DEAD, BANNED]
 
-"""A player in mafia game"""
+# A player in mafia game
 @dataclass
 class Player:
     ip : str
@@ -24,7 +24,10 @@ class Player:
         self.state = PlayerState.DEAD
 
     def switch_ban(self):
-        self.unban() if self.is_banned() else self.ban()
+        if self.is_banned():
+            self.unban()
+        else: 
+            self.ban()
 
     def is_banned(self) -> bool:
         return self.state == PlayerState.BANNED
