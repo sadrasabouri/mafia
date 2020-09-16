@@ -3,18 +3,19 @@ from random import randrange, shuffle
 from typing import Callable, Dict, List, Text, Tuple
 from flask import Flask, render_template, url_for, request
 from flask_httpauth import HTTPBasicAuth
-from mafia_params import ordered_roles, nRoles, role2team, descriptions, descriptions_fa, role2fa, max_comments
+from mafia_params import max_comments, role2team
 from player import Player
+from role import Role, Roles, roles, ordered_roles
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
 auth_GOD = HTTPBasicAuth()
-preshared_key = ""
+preshared_key : str = ""
 
-ip2player = {}
-roles = []
-player_id = 0
-nPlayers = 0
+ip2player : Dict[str, str] = {}
+roles : List[Role] = []
+player_id : int = 0
+nPlayers : int = 0
 
 nComments = 0
 comments_ordered = []
@@ -41,22 +42,22 @@ def index():
 
     # create new player
     role = roles[player_id]
-    image_name = role + "_" + str(randrange(1, nRoles[role] + 1))
-    ip2player[ip] = Player(ip, username, role, image_name)
+    image_name = role.get_name() + "_" + str(randrange(1, role.repitition + 1))
+    ip2player[ip] = Player(ip, username, role.name, image_name)
     
     # next player id
     player_id += 1 
     
     # log new player
     print("*" * 20, "New Player","*" * 20)
-    to_god = ip + " : " + str(player_id) + " : " + username +  " --> " + role
-    to_god += "/" + role2fa[role]    #TODO: Just in Farsi Mode
+    to_god = ip + " : " + str(player_id) + " : " + username +  " --> " + role.get_name()
+    to_god += "/" + role.get_name(is_farsi= True)    #TODO: Just in Farsi Mode
     print(to_god)
 
     return render_template("index.html",
                             image_name=image_name,
-                            role_name=role, role_name_fa=role2fa[role],
-                            description=descriptions[role], description_fa=descriptions_fa[role],
+                            role_name=role.name, role_name_fa=role.get_name(is_farsi= True),
+                            description=role.get_description(), description_fa=role.get_description(is_farsi= True),
                             is_farsi=True)
 
 @auth_GOD.verify_password
@@ -125,7 +126,7 @@ def god_page():
         request_mapper[req](player)
     
     return render_template("GOD.html", ip2player=ip2player,
-                           prompt_message=msg, roles={role:roles.count(role) for role in set(roles)},
+                           prompt_message=msg, roles={role.get_name() : roles.count(role) for role in set(roles)},
                            comments=comments_ordered, role2team=role2team)
 
 @app.errorhandler(404) 
@@ -157,21 +158,21 @@ def give_me_roles(ordered_roles):
     """
     n = len(ordered_roles)
     if n >= 14:
-        ordered_roles[12] = 'Groom'
-        ordered_roles[13] = 'Bride'
+        ordered_roles[12] = Roles.GROOM
+        ordered_roles[13] = Roles.BRIDE
         if n % 3 == 0:
-            ordered_roles[14] = 'Serial Killer'
+            ordered_roles[14] = Roles.SERIAL_KILLER
     if n % 3 != 0:
         try:
-            i = ordered_roles.index('Mafia')
-            ordered_roles[i] = 'Made Man'
-            ordered_roles[2] = 'Reporter'
+            i = ordered_roles.index(Roles.MAFIA)
+            ordered_roles[i] = Roles.MADE_MAN
+            ordered_roles[2] = Roles.REPORTER
         except ValueError:
             pass
     if n % 3 == 2:
         try:
-            i = ordered_roles.index('Mafia')
-            ordered_roles[i] = 'Kind Wife'
+            i = ordered_roles.index(Roles.MAFIA)
+            ordered_roles[i] = Roles.KIND_WIFE
         except ValueError:
             pass
     return ordered_roles
