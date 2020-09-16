@@ -1,3 +1,5 @@
+max_comments : int = lambda nPlayers : nPlayers // 3
+
 ordered_roles = ["Resident",
                  "Don",
                  "Resident",
