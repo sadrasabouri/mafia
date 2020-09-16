@@ -7,18 +7,67 @@ from mafia_params import max_comments, role2team
 from player import Player
 from role import Role, Roles, roles, ordered_roles
 
+is_farsi_mode : bool = True
+
+class PlayerManager:
+    n_players : int
+    roles : List[Role]
+    
+    ip2player : Dict[str, str] = {}
+    player_id : int = 0
+    n_comments = 0
+    comments_ordered = []
+
+    def __init__(self, n_players : int, roles : List[Role]):
+        self.n_players = n_players
+        self.roles = roles
+
+    def is_ip_valid(self, ip : str) -> bool:
+        return ip in self.ip2player.keys()
+
+    def get_player(self, ip : str):
+        if not self.is_ip_valid(ip):
+            return None
+        return self.ip2player[ip]
+
+    def get_next_role(self) -> Role:
+        return self.roles[self.player_id]
+
+    def new_player(self, ip : str, username : str) -> Player:
+        if self.player_id > self.n_players:
+            return None 
+        role = self.get_next_role()
+        image_name = role.get_name() + "_" + str(randrange(1, role.repitition + 1))
+        player = Player(ip, username, role, image_name)
+        self.ip2player[ip] = player
+        
+        self.player_id += 1
+
+        # log new player
+        print("*" * 20, "New Player","*" * 20)
+        to_god = ip + " : " + str(self.player_id) + " : " + username +  " --> " + role.get_name()
+        if is_farsi_mode:
+            to_god += "/" + role.get_name(is_farsi= True)
+        print(to_god)
+
+        return player
+
+    def comment(self, player : Player):
+        player.set_comment(True)
+        self.n_comments += 1
+        self.comments_ordered.append(player.get_ip())
+    
+    def uncomment(self, player : Player):
+        player.set_comment(False)
+        self.n_comments -= 1
+        self.comments_ordered.remove(player.get_ip())        
+
 app = Flask(__name__)
 auth = HTTPBasicAuth()
 auth_GOD = HTTPBasicAuth()
 preshared_key : str = ""
 
-ip2player : Dict[str, str] = {}
-roles : List[Role] = []
-player_id : int = 0
-nPlayers : int = 0
-
-nComments = 0
-comments_ordered = []
+player_manager = None
 
 @auth.verify_password
 def verify_password(username, password):
@@ -32,30 +81,19 @@ def index():
     ip = str(request.remote_addr)
 
     # redirect current players
-    if ip in ip2player.keys():
-        return render_template("Player.html", player=ip2player[ip])
-
-    # reject excess players
-    global player_id
-    if player_id > nPlayers:
-        return not_found_page()
+    if player_manager.is_ip_valid(ip):
+        return render_template("Player.html", player=player_manager.get_player[ip])
 
     # create new player
-    role = roles[player_id]
-    image_name = role.get_name() + "_" + str(randrange(1, role.repitition + 1))
-    ip2player[ip] = Player(ip, username, role.name, image_name)
+    player : Player = player_manager.new_player(ip, username)
     
-    # next player id
-    player_id += 1 
-    
-    # log new player
-    print("*" * 20, "New Player","*" * 20)
-    to_god = ip + " : " + str(player_id) + " : " + username +  " --> " + role.get_name()
-    to_god += "/" + role.get_name(is_farsi= True)    #TODO: Just in Farsi Mode
-    print(to_god)
+    # reject excess players
+    if player is None:
+        return not_found_page()
 
+    role = player.get_role()
     return render_template("index.html",
-                            image_name=image_name,
+                            image_name=player.image_name,
                             role_name=role.name, role_name_fa=role.get_name(is_farsi= True),
                             description=role.get_description(), description_fa=role.get_description(is_farsi= True),
                             is_farsi=True)
@@ -77,21 +115,14 @@ def god_page():
         player.switch_ban()
 
     def comment(player : Player) -> None:
-        global nComments, comments_ordered
-        
-        if nComments > max_comments(nPlayers):
-            nonlocal msg
-            msg = "Error: Out of Comments."
-            return
-
         if player.get_comment() is False:
-            player.set_comment(True)
-            nComments += 1
-            comments_ordered.append(player.get_ip())
+            if player_manager.n_comments > max_comments(nPlayers):
+                nonlocal msg
+                msg = "Error: Out of Comments."
+                return
+            player_manager.comment(player)
         else:
-            player.set_comment(False)
-            nComments -= 1
-            comments_ordered.remove(player.get_ip())
+            player_manager.uncomment(player)
 
     request_mapper : Dict[str, Callable] = {
         "Kill": kill,
@@ -107,11 +138,11 @@ def god_page():
             
             if ip is None:
                 continue
-            if ip not in ip2player.keys():
+            if not player_manager.is_ip_valid(ip):
                 print("invalid ip / request: ", ip, f"({key})")
                 return -1
 
-            player = ip2player[ip]
+            player = player_manager.get_player(ip)
             requests.append((key, player))
         return requests
 
@@ -125,9 +156,9 @@ def god_page():
     for req, player in request_list:
         request_mapper[req](player)
     
-    return render_template("GOD.html", ip2player=ip2player,
+    return render_template("GOD.html", ip2player=player_manager.ip2player,
                            prompt_message=msg, roles={role.get_name() : roles.count(role) for role in set(roles)},
-                           comments=comments_ordered, role2team=role2team)
+                           comments=player_manager.comments_ordered, role2team=role2team)
 
 @app.errorhandler(404) 
 def invalid_route(e):
@@ -197,6 +228,8 @@ if __name__ == "__main__":
     roles = give_me_roles(ordered_roles[:nPlayers])
     shuffle(roles)
     
+    player_manager = PlayerManager(n_players= nPlayers, roles= roles)
+
     # preshared key generation
     preshared_key = gen_preshared_key()
     print("_" * 20 + "GOD's password" + "_" * 20)
