@@ -92,10 +92,10 @@ def god_page():
             nComments -= 1
             comments_ordered.remove(player.get_ip())
 
-    request_mapper : Dict[Callable] = {
-        "Kill", kill,
-        "Ban", switch_ban,
-        "Comment", comment
+    request_mapper : Dict[str, Callable] = {
+        "Kill": kill,
+        "Ban": switch_ban,
+        "Comment": comment
     }
 
     # filters out invalid requests
@@ -103,20 +103,21 @@ def god_page():
         requests = []
         for key in request_mapper.keys():
             ip = request.args.get(key)
-
-            if ip is None or ip not in ip2player.keys():
-                print("invalid ip / request: ", ip, f"({key})")
+            
+            if ip is None:
                 continue
+            if ip not in ip2player.keys():
+                print("invalid ip / request: ", ip, f"({key})")
+                return -1
 
             player = ip2player[ip]
             requests.append((key, player))
-
         return requests
 
     msg = ""
 
     request_list = get_requests()
-    if len(request_list) == 0:
+    if request_list == -1:
         return not_found_page()
 
     # handle requests
