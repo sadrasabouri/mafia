@@ -5,7 +5,7 @@ from flask import Flask, render_template, url_for, request
 from flask_httpauth import HTTPBasicAuth
 from mafia_params import max_comments, role2team
 from player import Player
-from role import Role, Roles, roles, ordered_roles
+from Role import Role, Roles, roles, ordered_roles
 
 is_farsi_mode : bool = True
 
@@ -38,7 +38,7 @@ class PlayerManager:
             return None 
         role = self.get_next_role()
         image_name = role.get_name() + "_" + str(randrange(1, role.repitition + 1))
-        player = Player(ip, username, role, image_name)
+        player = Player(ip, username, role.get_name(), image_name)
         self.ip2player[ip] = player
         
         self.player_id += 1
@@ -82,16 +82,16 @@ def index():
 
     # redirect current players
     if player_manager.is_ip_valid(ip):
-        return render_template("Player.html", player=player_manager.get_player[ip])
+        return render_template("Player.html", player=player_manager.get_player(ip))
 
     # create new player
+    role = player_manager.get_next_role()
     player : Player = player_manager.new_player(ip, username)
     
     # reject excess players
     if player is None:
         return not_found_page()
 
-    role = player.get_role()
     return render_template("index.html",
                             image_name=player.image_name,
                             role_name=role.name, role_name_fa=role.get_name(is_farsi= True),
